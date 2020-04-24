@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+
+.keyboard {
+  stroke: black;
+  stroke-width: 1px;
+  fill: none;
+}
