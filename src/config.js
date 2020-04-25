@@ -11,9 +11,6 @@ const keyPositions = {
 		'shft', '/', '.', ',', 'm', 'k',
 		'ctrl', 'punc', 'space'
 	],
-	eventToKey: [
-
-	]
 };
 
 const config = {

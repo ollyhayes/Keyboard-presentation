@@ -30,7 +30,17 @@ function handleKey(event, isPressed) {
 	}))
 }
 
-function updateKey(keys, withText, update) {
+function updateKey(keys, key, update) {
+	const eventToKey = {
+		'Escape': 'esc',
+		'Tab': 'tab',
+		'Enter': 'ret',
+		'Backspace': 'back',
+		'Control': 'ctrl',
+		'Shift': 'shft'
+	};
+	const withText = eventToKey[key] || key;
+
 	return keys.map(key => key.text === withText
 		? {...key, ...update}
 		: key)

@@ -41,7 +41,7 @@ export function KeyboardSide({isLeft}) {
 
 		{ x: -167.3204, y: 200.8565 },
 		{ x: -109, y: 209, rotation: 15 * (isLeft ? 1 : -1) },
-		{ x: -45, y: 219, rotation: 60 * (isLeft ? -1 : 1), width: keySize * 1.5 }
+		{ x: -49, y: 221, rotation: 60 * (isLeft ? -1 : 1), width: keySize * 1.5 }
 	  ].map(key => ({
 		  height: keySize,
 		  width: keySize,
