@@ -190,36 +190,12 @@ class HookManager(threading.Thread):
             return 0
     
     def makekeyhookevent(self, keysym, event):
-        storewm = self.xwindowinfo()
         if event.type == X.KeyPress:
             MessageName = "key down"
         elif event.type == X.KeyRelease:
             MessageName = "key up"
-        return pyxhookkeyevent(storewm["handle"], storewm["name"], storewm["class"], self.lookup_keysym(keysym), self.asciivalue(keysym), False, event.detail, MessageName)
+        return pyxhookkeyevent(self.lookup_keysym(keysym), self.asciivalue(keysym), event.detail, MessageName)
     
-    def xwindowinfo(self):
-        try:
-            windowvar = self.local_dpy.get_input_focus().focus
-            wmname = windowvar.get_wm_name()
-            wmclass = windowvar.get_wm_class()
-            wmhandle = str(windowvar)[20:30]
-        except:
-            ## This is to keep things running smoothly. It almost never happens, but still...
-            return {"name":None, "class":None, "handle":None}
-        if (wmname == None) and (wmclass == None):
-            try:
-                windowvar = windowvar.query_tree().parent
-                wmname = windowvar.get_wm_name()
-                wmclass = windowvar.get_wm_class()
-                wmhandle = str(windowvar)[20:30]
-            except:
-                ## This is to keep things running smoothly. It almost never happens, but still...
-                return {"name":None, "class":None, "handle":None}
-        if wmclass == None:
-            return {"name":wmname, "class":wmclass, "handle":wmhandle}
-        else:
-            return {"name":wmname, "class":wmclass[0], "handle":wmhandle}
-
 class pyxhookkeyevent:
     """This is the class that is returned with each key event.f
     It simply creates the variables below in the class.
@@ -234,18 +210,14 @@ class pyxhookkeyevent:
     MessageName = "key down", "key up".
     """
     
-    def __init__(self, Window, WindowName, WindowProcName, Key, Ascii, KeyID, ScanCode, MessageName):
-        self.Window = Window
-        self.WindowName = WindowName
-        self.WindowProcName = WindowProcName
+    def __init__(self, Key, Ascii, ScanCode, MessageName):
         self.Key = Key
         self.Ascii = Ascii
-        self.KeyID = KeyID
         self.ScanCode = ScanCode
         self.MessageName = MessageName
     
     def __str__(self):
-        return "Window Handle: " + str(self.Window) + "\nWindow Name: " + str(self.WindowName) + "\nWindow's Process Name: " + str(self.WindowProcName) + "\nKey Pressed: " + str(self.Key) + "\nAscii Value: " + str(self.Ascii) + "\nKeyID: " + str(self.KeyID) + "\nScanCode: " + str(self.ScanCode) + "\nMessageName: " + str(self.MessageName) + "\n"
+        return "Key Pressed: " + str(self.Key) + "\nAscii Value: " + str(self.Ascii) + "\nScanCode: " + str(self.ScanCode) + "\nMessageName: " + str(self.MessageName) + "\n"
     
 if __name__ == '__main__':
     hm = HookManager()
