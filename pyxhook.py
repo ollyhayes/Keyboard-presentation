@@ -113,12 +113,6 @@ class HookManager(threading.Thread):
     def printevent(self, event):
         print event
     
-    def HookKeyboard(self):
-        pass
-        # We don't need to do anything here anymore, since the default mask 
-        # is now set to contain X.KeyPress
-        #self.contextEventMask[0] = X.KeyPress
-    
     def processevents(self, reply):
         if reply.category != record.FromServer:
             return
@@ -173,28 +167,18 @@ class HookManager(threading.Thread):
             self.ison["shift"] = self.ison["shift"] - 1
         return self.makekeyhookevent(keysym, event)
 
-
-    # need the following because XK.keysym_to_string() only does printable chars
-    # rather than being the correct inverse of XK.string_to_keysym()
     def lookup_keysym(self, keysym):
         for name in dir(XK):
             if name.startswith("XK_") and getattr(XK, name) == keysym:
                 return name.lstrip("XK_")
         return "[%d]" % keysym
 
-    def asciivalue(self, keysym):
-        asciinum = XK.string_to_keysym(self.lookup_keysym(keysym))
-        if asciinum < 256:
-            return asciinum
-        else:
-            return 0
-    
     def makekeyhookevent(self, keysym, event):
         if event.type == X.KeyPress:
             MessageName = "key down"
         elif event.type == X.KeyRelease:
             MessageName = "key up"
-        return pyxhookkeyevent(self.lookup_keysym(keysym), self.asciivalue(keysym), event.detail, MessageName)
+        return pyxhookkeyevent(self.lookup_keysym(keysym), event.detail, MessageName)
     
 class pyxhookkeyevent:
     """This is the class that is returned with each key event.f
@@ -210,18 +194,16 @@ class pyxhookkeyevent:
     MessageName = "key down", "key up".
     """
     
-    def __init__(self, Key, Ascii, ScanCode, MessageName):
+    def __init__(self, Key, ScanCode, MessageName):
         self.Key = Key
-        self.Ascii = Ascii
         self.ScanCode = ScanCode
         self.MessageName = MessageName
     
     def __str__(self):
-        return "Key Pressed: " + str(self.Key) + "\nAscii Value: " + str(self.Ascii) + "\nScanCode: " + str(self.ScanCode) + "\nMessageName: " + str(self.MessageName) + "\n"
+        return "Key Pressed: " + str(self.Key) + "\nScanCode: " + str(self.ScanCode) + "\nMessageName: " + str(self.MessageName) + "\n"
     
 if __name__ == '__main__':
     hm = HookManager()
-    hm.HookKeyboard()
     hm.KeyDown = hm.printevent
     hm.KeyUp = hm.printevent
 
