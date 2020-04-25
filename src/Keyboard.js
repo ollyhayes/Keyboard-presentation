@@ -70,8 +70,36 @@ export default function Keyboard() {
 		{ "x": 136.4725, "y": 86.9045 },
 		{ "x": 136.4725, "y": 33.0425 },
 		{ "x": 55.679500000000004, "y": -15.8565 },
-		{ "x": 114, "y": -24, "rotation": -15 },
-		{ "x": 178, "y": -34, "rotation": -30, height: keySize * 1.5 }
+		{ "x": 114, "y": -24, "rotation": 15 },
+		{ "x": 178, "y": -34, "rotation": 30, height: keySize * 1.5 }
+	  ].map(key => ({
+		  height: keySize,
+		  width: keySize,
+		  ...key
+	  }));
+
+	const originedKeys = [
+		{ x: -355.8385, y: 50.9654},
+		{ x: -355.8385, y: 104.8275 },
+		{ x: -355.8385, y: 158.6895 },
+		{ x: -301.9745, y: 50.96549},
+		{ x: -301.9745, y: 104.8275 },
+		{ x: -301.9745, y: 158.6895 },
+		{ x: -248.1125, y: 37.50050},
+		{ x: -248.1125, y: 91.3625 },
+		{ x: -248.1125, y: 145.2235 },
+		{ x: -194.2515, y: 30.76650},
+		{ x: -194.2515, y: 84.6295 },
+		{ x: -194.2515, y: 138.4915 },
+		{ x: -140.3885, y: 37.50050},
+		{ x: -140.3885, y: 91.3625 },
+		{ x: -140.3885, y: 145.2235 },
+		{ x: -86.5275, y: 44.232500},
+		{ x: -86.5275, y: 98.0955 },
+		{ x: -86.5275, y: 151.9575 },
+		{ x: -167.3204, y: 200.8565 },
+		{ x: -109, y: 209, rotation: 15 },
+		{ x: -45, y: 219, rotation: 30, height: keySize * 1.5 }
 	  ].map(key => ({
 		  height: keySize,
 		  width: keySize,
@@ -159,10 +187,11 @@ export default function Keyboard() {
 	// const diff = [-598.023,-393.8761,0]
 	// const diff = [keySize / 2,keySize / 2,0]
 	const diff = [0,0,0]
-	const mult = [1,1,1]
-	// const mult = [1, -1, 1]
+	// const diff = [-223, 185, 0]
+	// const mult = [1,1,1]
+	const mult = [1, 1, 1]
 
-	const translatedKeys = resquared.map(key => ({...key, x: key.x * mult[0] + diff[0], y: key.y * mult[1] + diff[1]}))
+	const translatedKeys = originedKeys.map(key => ({...key, x: key.x * mult[0] + diff[0], y: key.y * mult[1] + diff[1]}))
 
 
 	// const xDiff = 0.01;//598.023;
@@ -170,9 +199,9 @@ export default function Keyboard() {
 	// const pathDiff = [-223, 185, 0]
 	const pathDiff = [0,0,0]
 	// const pathMult = [1,-1,1]
-		const pathMult = [1, 1, 1]
+	const pathMult = [1, 1, 1]
 
-	const translatedPath = oldPath.map(c => ({...c, args: c.args.map((a, i) =>
+	const translatedPath = path.map(c => ({...c, args: c.args.map((a, i) =>
 			a * pathMult[getDimensionRelative(c.command, i)] + pathDiff[getDimension(c.command, i)]
 	)}))
 
@@ -196,7 +225,7 @@ export default function Keyboard() {
 					: 2
 	}
 
-	console.log(JSON.stringify(translatedKeys, undefined, ' '))
+	console.log(JSON.stringify(translatedPath, undefined, ' '))
 
 	const pathString = translatedPath.reduce((pathString, {command, args}) => `${pathString}${command} ${args.join(' ')} `, '') + ' Z';
 
@@ -255,15 +284,5 @@ export default function Keyboard() {
 		}
 		<line x1="-1000" x2="1000"/>
 		<line y1="-1000" y2="1000"/>
-		<g transform="translate(699.3511,394.2501)" id="g266">
-			<g transform="translate(-598.023,-393.8761)" id="g266">
-				<path d="m 0,0 -10.123,-37.936 37.935,-10.123 10.124,37.935 z" />
-			</g>
-		</g>
-		<g transform="translate(769.1197,386.422)" id="g270">
-			<g transform="translate(-598.023,-393.8761)" id="g270">
-				<path d="m 0,0 -19.608,-34.017 34.015,-19.607 19.609,34.016 z" />
-			</g>
-		</g>
 	</svg>;
 }
