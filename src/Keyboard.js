@@ -1,6 +1,15 @@
 import React from 'react';
 
 export default function Keyboard() {
+	return <svg className="keyboard"  viewBox="-385 0 770 275">
+		<KeyboardSide isLeft={true}/>
+		<KeyboardSide isLeft={false}/>
+		{/* <line x1="-1000" x2="1000"/>
+		<line y1="-1000" y2="1000"/> */}
+	</svg>;
+}
+
+export function KeyboardSide({isLeft}) {
 	const keySize = 39.263
 
 	const keys = [
@@ -23,8 +32,8 @@ export default function Keyboard() {
 		{ x: -86.5275, y: 98.0955 },
 		{ x: -86.5275, y: 151.9575 },
 		{ x: -167.3204, y: 200.8565 },
-		{ x: -109, y: 209, rotation: 15 },
-		{ x: -45, y: 219, rotation: 30, height: keySize * 1.5 }
+		{ x: -109, y: 209, rotation: 15 * (isLeft ? 1 : -1) },
+		{ x: -45, y: 219, rotation: 30 * (isLeft ? 1 : -1), height: keySize * 1.5 }
 	  ].map(key => ({
 		  height: keySize,
 		  width: keySize,
@@ -113,7 +122,7 @@ export default function Keyboard() {
 	function transformKeys(keys, diff, multiplier) {
 		diff = diff || [0,0,0]
 		multiplier = multiplier || [1, 1, 1]
-		return multiplier.map(key => ({...key, x: key.x * multiplier[0] + diff[0], y: key.y * multiplier[1] + diff[1]}))
+		return keys.map(key => ({...key, x: key.x * multiplier[0] + diff[0], y: key.y * multiplier[1] + diff[1]}))
 	}
 
 	function transformPath(path, diff, multiplier) {
@@ -135,7 +144,7 @@ export default function Keyboard() {
 		}
 
 		function getDimensionRelative(command, index) {
-			return command.toUpperCase() === 'C' || command.toUpperCase() === 'L' || command.toUpperCase() === 'm'
+			return command.toUpperCase() === 'C' || command.toUpperCase() === 'L' || command.toUpperCase() === 'M'
 				? index % 2 === 0 ? 0 : 1
 				: command.toUpperCase() === 'H'
 					? 0
@@ -147,11 +156,17 @@ export default function Keyboard() {
 
 	function createPath(path) {return path.reduce((pathString, {command, args}) => `${pathString}${command} ${args.join(' ')} `, '') + ' Z'};
 
-	return <svg className="keyboard"  viewBox="-385 0 770 275">
-		{/* <path d={createPath(path)}/> */}
-		<path d={createPath(path2)}/>
+	const transformedKeys = isLeft
+		? keys
+		: transformKeys(keys, undefined, [-1,1,1]);
+	const transformedPath = isLeft
+		? path2
+		: transformPath(path2, undefined, [-1,1,1]);
+	
+	return <g>
+		<path d={createPath(transformedPath)}/>
 		{
-			keys.map(({x, y, height, width, rotation, color}, index) =>
+			transformedKeys.map(({x, y, height, width, rotation, color}, index) =>
 				<rect 
 					key={index}
 					stroke={color || 'black'}
@@ -162,7 +177,5 @@ export default function Keyboard() {
 					width={width}
 				/>)
 		}
-		{/* <line x1="-1000" x2="1000"/>
-		<line y1="-1000" y2="1000"/> */}
-	</svg>;
+	</g>;
 }
