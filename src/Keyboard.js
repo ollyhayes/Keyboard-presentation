@@ -147,8 +147,8 @@ export default function Keyboard() {
 
 	function createPath(path) {return path.reduce((pathString, {command, args}) => `${pathString}${command} ${args.join(' ')} `, '') + ' Z'};
 
-	return <svg className="keyboard" viewBox="-500 -500 1122.52 793.70135" height="793.70135" width="1122.52">
-		<path d={createPath(path)}/>
+	return <svg className="keyboard"  viewBox="-385 0 770 275">
+		{/* <path d={createPath(path)}/> */}
 		<path d={createPath(path2)}/>
 		{
 			keys.map(({x, y, height, width, rotation, color}, index) =>
