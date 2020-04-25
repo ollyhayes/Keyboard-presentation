@@ -1,16 +1,19 @@
 import React from 'react';
-import config from './config';
+import { useState } from './store.js'
 
 export default function Keyboard() {
 	return <svg className="keyboard"  viewBox="-400 0 800 400">
-		<KeyboardSide isLeft={true} configKeys={config.keyPositions.left}/>
-		<KeyboardSide isLeft={false} configKeys={config.keyPositions.right}/>
+		<KeyboardSide isLeft={true}/>
+		<KeyboardSide isLeft={false}/>
 		{/* <line x1="-1000" x2="1000"/>
 		<line y1="-1000" y2="1000"/> */}
 	</svg>;
 }
 
-export function KeyboardSide({isLeft, configKeys}) {
+export function KeyboardSide({isLeft}) {
+	const state = useState();
+	const keysFromState = state.keys[isLeft ? 'left' : 'right'];
+
 	const keySize = 39.263
 
 	const keys = [
@@ -45,7 +48,7 @@ export function KeyboardSide({isLeft, configKeys}) {
 		  ...key
 	  })).map((key, index) => ({
 		  ...key,
-		  text: configKeys[index]
+		  ...keysFromState[index]
 	  }));
 
 	const path = [ 
@@ -177,22 +180,7 @@ export function KeyboardSide({isLeft, configKeys}) {
 	
 	return <g transform={transform}>
 		<path d={createPath(transformedPath)}/>
-		{
-			transformedKeys.map(({x, y, height, width, rotation, color, text}, index) =>
-				<g key={index} transform={getKeyTransform(x, y, height, width, rotation)}>
-					<rect 
-						stroke={color || 'black'}
-						x={-width / 2}
-						y={-height / 2}
-						width={width}
-						height={height}
-					/>
-					text && <text textAnchor="middle" dominantBaseline="middle" fill="black">
-						{text}
-					</text>
-					
-				</g>)
-		}
+		{ transformedKeys.map((key, index) => <Key key={index} {...key}/>) }
 	</g>;
 }
 
@@ -203,4 +191,25 @@ function getKeyTransform(x, y, height, width, rotation) {
 	return rotate
 		? rotate + translate 
 		: translate;
+}
+
+function Key({x, y, height, width, rotation, text, isPressed}) {
+	return <g transform={getKeyTransform(x, y, height, width, rotation)}>
+		<rect 
+			// stroke={color || 'black'}
+			x={-width / 2}
+			y={-height / 2}
+			width={width}
+			height={height}
+			fill={isPressed ? 'red' : 'none'}
+		/>
+		text && <text 
+			textAnchor="middle" 
+			dominantBaseline="middle"
+			fill={isPressed ? 'white' : 'black'}
+			stroke={isPressed ? 'white' : 'black'}>
+			{text}
+		</text>
+		
+	</g>;
 }
