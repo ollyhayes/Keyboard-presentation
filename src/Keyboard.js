@@ -62,14 +62,62 @@ export default function Keyboard() {
 		{ command: 'c', args: [-0.367,0.037,-0.713,0.185,-0.993,0.424]},
 		{ command: 'C', args: [29.897,-40.974,-0.01,0.014,0,0]},
 	];
-	const pathString = path.reduce((pathString, {command, args}) => `${pathString}${command} ${args.join(' ')} `, '') + ' Z';
 
-	return <svg className="keyboard" viewBox="0 0 1122.52 793.70135" height="793.70135" width="1122.52">
-		<g transform="translate(598.023,393.8761)" id="g204">
-			<path d={pathString}/>
-		</g>
+
+	const translatedKeys = keys.map(key => ({x: key.x - 598.023, y: key.y - 393.8761}))
+
+
+	// const xDiff = 0.01;//598.023;
+	// const yDiff = 141.398;//393.8761;
+	const diff = [-223, 85, 0]
+
+	const translatedPath = path.map(c => ({...c, args: c.args.map((a, i) =>
+			a + diff[getDimension(c.command, i)]
+	)}))
+
+	function getDimension(command, index) {
+		return command === 'C' || command === 'L' || command === 'm'
+			? index % 2 === 0 ? 0 : 1
+			: command === 'H'
+				? 0
+				: command === 'V'
+					? 1
+					: 2
+	}
+
+	console.log(JSON.stringify(translatedPath, undefined, ' '))
+
+	const pathString = translatedPath.reduce((pathString, {command, args}) => `${pathString}${command} ${args.join(' ')} `, '') + ' Z';
+
+	let keysXMin = 999;
+	let keysYMin = 99;
+	
+	keys.forEach(key => {
+	  keysXMin = Math.min(key.x, keysXMin);
+	  keysYMin = Math.min(key.y, keysYMin);
+	})
+	
+	console.log(`keys: ${keysXMin}, ${keysYMin}`)
+	
+	let pathXMin = 999;
+	let pathYMin = 999;
+	
+	translatedPath.forEach(command => {
+	  if (command.command === command.command.toUpperCase())
+		 command.args.forEach((arg, index) => {
+			getDimension(command.command, index) === 0
+				? pathXMin = Math.min(arg, pathXMin)
+				: pathYMin = Math.min(arg, pathYMin)
+		 })
+	});
+								  
+	console.log(`path: ${pathXMin}, ${pathYMin}`)
+
+
+	return <svg className="keyboard" viewBox="-500 -10 1122.52 793.70135" height="793.70135" width="1122.52">
+		<path d={pathString}/>
 		{
-			keys.map(({x, y, rotation, color}, index) =>
+			translatedKeys.map(({x, y, rotation, color}, index) =>
 				<path
 					key={index}
 					stroke={color || 'red'}
@@ -77,5 +125,6 @@ export default function Keyboard() {
 					d={`m ${x},${y} h 39.263 v 39.262 h -39.263 z`}
 				/>)
 		}
+		<circle r="5"/>
 	</svg>;
 }
