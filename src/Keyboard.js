@@ -2,7 +2,7 @@ import React from 'react';
 import config from './config';
 
 export default function Keyboard() {
-	return <svg className="keyboard"  viewBox="-500 0 1000 400">
+	return <svg className="keyboard"  viewBox="-400 0 800 400">
 		<KeyboardSide isLeft={true} configKeys={config.keyPositions.left}/>
 		<KeyboardSide isLeft={false} configKeys={config.keyPositions.right}/>
 		{/* <line x1="-1000" x2="1000"/>
@@ -172,8 +172,8 @@ export function KeyboardSide({isLeft, configKeys}) {
 		: transformPath(path, undefined, [-1,1,1]);
 
 	const transform = isLeft
-		? "translate(-80, 30) rotate(5)"
-		: "translate(80, 30) rotate(-5)"
+		? "translate(-0, 30) rotate(5)"
+		: "translate(0, 30) rotate(-5)"
 	
 	return <g transform={transform}>
 		<path d={createPath(transformedPath)}/>
