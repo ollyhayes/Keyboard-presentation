@@ -196,7 +196,6 @@ function getKeyTransform(x, y, height, width, rotation) {
 function Key({x, y, height, width, rotation, text, isPressed}) {
 	return <g transform={getKeyTransform(x, y, height, width, rotation)}>
 		<rect 
-			// stroke={color || 'black'}
 			x={-width / 2}
 			y={-height / 2}
 			width={width}
@@ -205,9 +204,10 @@ function Key({x, y, height, width, rotation, text, isPressed}) {
 		/>
 		text && <text 
 			textAnchor="middle" 
-			dominantBaseline="middle"
+			dominantBaseline="central"
 			fill={isPressed ? 'white' : 'black'}
-			stroke={isPressed ? 'white' : 'black'}>
+			stroke={isPressed ? 'white' : 'black'}
+			style={{fontSize: text.length === 1 ? '25px' : '16px'}} >
 			{text}
 		</text>
 		
