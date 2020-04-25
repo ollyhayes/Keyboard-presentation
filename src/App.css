@@ -23,9 +23,10 @@ g.key.is-pressed rect {
 g.key text {
   transition: fill 0.2s, stroke 0.2s;
   fill: black;
-  stroke: black;
+  stroke: none;
+  font-family: monospace;
 }
 g.key.is-pressed text {
   fill: white;
-  stroke: white;
+  stroke: none;
 }

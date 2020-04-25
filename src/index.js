@@ -33,11 +33,11 @@ function handleKey(event, isPressed) {
 function updateKey(keys, key, update) {
 	const eventToKey = {
 		'Escape': 'esc',
-		'Tab': 'tab',
-		'Enter': 'ret',
-		'Backspace': 'back',
+		'Tab': '↹',
+		'Enter': '↲',
+		'Backspace': '↤',
 		'Control': 'ctrl',
-		'Shift': 'shft'
+		'Shift': '⇑'
 	};
 	const withText = eventToKey[key] || key;
 

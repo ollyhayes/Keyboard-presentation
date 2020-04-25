@@ -195,25 +195,14 @@ function getKeyTransform(x, y, height, width, rotation) {
 
 function Key({x, y, height, width, rotation, text, isPressed}) {
 	return <g className={'key' + (isPressed ? ' is-pressed' : '')} transform={getKeyTransform(x, y, height, width, rotation)}>
-		<rect 
-			x={-width / 2}
-			y={-height / 2}
-			width={width}
-			height={height}
-			fill={isPressed ? 'red' : 'none'}
-		/>
-		text && <text 
+		<rect x={-width / 2} y={-height / 2} width={width} height={height} />
+		<text 
 			textAnchor="middle" 
 			dominantBaseline="central"
-			stroke={isPressed ? 'white' : 'black'}
 			style={{
-				fontSize: text.length === 1 ? '25px' : '15px',
-				fontFamily: 'monospace',
-				// fill: isPressed ? 'white' : 'black',
-				// stroke: isPressed ? 'white' : 'black'
+				fontSize: text.length === 1 ? '25px' : '16px',
 			}} >
 			{text}
 		</text>
-		
 	</g>;
 }
