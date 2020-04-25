@@ -201,10 +201,3 @@ class pyxhookkeyevent:
 	
 	def __str__(self):
 		return "Key Pressed: " + str(self.Key) + "\nScanCode: " + str(self.ScanCode) + "\nMessageName: " + str(self.MessageName) + "\n"
-	
-if __name__ == '__main__':
-	hm = HookManager()
-	hm.KeyDown = hm.printevent
-	hm.KeyUp = hm.printevent
-
-	hm.start()

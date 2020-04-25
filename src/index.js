@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { Provider, createStore } from './store.js'
 import config from './config';
+import initialiseSocket from './socket';
 
 const store = createStore(config);
 
@@ -13,6 +14,10 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById('root')
 );
+
+initialiseSocket(data => {
+	console.log(data);
+});
 
 document.addEventListener('keydown', event => handleKey(event, true));
 document.addEventListener('keyup', event => handleKey(event, false));
