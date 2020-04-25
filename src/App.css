@@ -11,3 +11,21 @@ html,body,svg
   stroke-width: 1px;
   fill: none;
 }
+
+g.key rect {
+  transition: fill 0.2s;
+  fill: transparent;
+}
+g.key.is-pressed rect {
+  fill: red;
+}
+
+g.key text {
+  transition: fill 0.2s, stroke 0.2s;
+  fill: black;
+  stroke: black;
+}
+g.key.is-pressed text {
+  fill: white;
+  stroke: white;
+}
