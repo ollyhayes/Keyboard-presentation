@@ -1,43 +1,51 @@
 import React from 'react';
+import config from './config';
 
 export default function Keyboard() {
 	return <svg className="keyboard"  viewBox="-500 0 1000 400">
-		<KeyboardSide isLeft={true}/>
-		<KeyboardSide isLeft={false}/>
+		<KeyboardSide isLeft={true} configKeys={config.keyPositions.left}/>
+		<KeyboardSide isLeft={false} configKeys={config.keyPositions.right}/>
 		{/* <line x1="-1000" x2="1000"/>
 		<line y1="-1000" y2="1000"/> */}
 	</svg>;
 }
 
-export function KeyboardSide({isLeft}) {
+export function KeyboardSide({isLeft, configKeys}) {
 	const keySize = 39.263
 
 	const keys = [
 		{ x: -355.8385, y: 50.9654},
-		{ x: -355.8385, y: 104.8275 },
-		{ x: -355.8385, y: 158.6895 },
 		{ x: -301.9745, y: 50.96549},
-		{ x: -301.9745, y: 104.8275 },
-		{ x: -301.9745, y: 158.6895 },
 		{ x: -248.1125, y: 37.50050},
-		{ x: -248.1125, y: 91.3625 },
-		{ x: -248.1125, y: 145.2235 },
 		{ x: -194.2515, y: 30.76650},
-		{ x: -194.2515, y: 84.6295 },
-		{ x: -194.2515, y: 138.4915 },
 		{ x: -140.3885, y: 37.50050},
-		{ x: -140.3885, y: 91.3625 },
-		{ x: -140.3885, y: 145.2235 },
 		{ x: -86.5275, y: 44.232500},
+
+		{ x: -355.8385, y: 104.8275 },
+		{ x: -301.9745, y: 104.8275 },
+		{ x: -248.1125, y: 91.3625 },
+		{ x: -194.2515, y: 84.6295 },
+		{ x: -140.3885, y: 91.3625 },
 		{ x: -86.5275, y: 98.0955 },
+
+
+		{ x: -355.8385, y: 158.6895 },
+		{ x: -301.9745, y: 158.6895 },
+		{ x: -248.1125, y: 145.2235 },
+		{ x: -194.2515, y: 138.4915 },
+		{ x: -140.3885, y: 145.2235 },
 		{ x: -86.5275, y: 151.9575 },
+
 		{ x: -167.3204, y: 200.8565 },
 		{ x: -109, y: 209, rotation: 15 * (isLeft ? 1 : -1) },
-		{ x: -45, y: 219, rotation: 30 * (isLeft ? 1 : -1), height: keySize * 1.5 }
+		{ x: -45, y: 219, rotation: 60 * (isLeft ? -1 : 1), width: keySize * 1.5 }
 	  ].map(key => ({
 		  height: keySize,
 		  width: keySize,
 		  ...key
+	  })).map((key, index) => ({
+		  ...key,
+		  text: configKeys[index]
 	  }));
 
 	const path = [ 
@@ -170,16 +178,29 @@ export function KeyboardSide({isLeft}) {
 	return <g transform={transform}>
 		<path d={createPath(transformedPath)}/>
 		{
-			transformedKeys.map(({x, y, height, width, rotation, color}, index) =>
-				<rect 
-					key={index}
-					stroke={color || 'black'}
-					transform={rotation && `rotate(${rotation}, ${x}, ${y})`}
-					x={x - width / 2}
-					y={y - height / 2}
-					height={height}
-					width={width}
-				/>)
+			transformedKeys.map(({x, y, height, width, rotation, color, text}, index) =>
+				<g key={index} transform={getKeyTransform(x, y, height, width, rotation)}>
+					<rect 
+						stroke={color || 'black'}
+						x={-width / 2}
+						y={-height / 2}
+						width={width}
+						height={height}
+					/>
+					text && <text textAnchor="middle" dominantBaseline="middle" fill="black">
+						{text}
+					</text>
+					
+				</g>)
 		}
 	</g>;
+}
+
+function getKeyTransform(x, y, height, width, rotation) {
+	const translate = ` translate(${x}, ${y})`;
+	const rotate = rotation && `rotate(${rotation}, ${x}, ${y})`;
+
+	return rotate
+		? rotate + translate 
+		: translate;
 }
