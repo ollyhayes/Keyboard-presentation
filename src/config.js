@@ -1,22 +1,42 @@
 const keyPositions = {
 	left: [
-		'↹', 'q', 'w', 'f', 'p', 'g',
+		'tab', 'q', 'w', 'f', 'p', 'g',
 		'esc', 'a', 'r', 's', 't', 'd',
-		'⇑', 'z', 'x', 'c', 'v', 'b',
-		'ctrl', '!?$', '←↓↑→'
+		'lshift', 'z', 'x', 'c', 'v', 'b',
+		'lctrl', 'lpunc', 'arrows'
 	],
 	right: [
-		'↤', ';', 'y', 'u', 'l', 'j',
-		'↲', 'o', 'i', 'e', 'n', 'h',
-		'⇑', '/', '.', ',', 'm', 'k',
-		'ctrl', '!?$', 'space'
+		'backspace', ';', 'y', 'u', 'l', 'j',
+		'enter', 'o', 'i', 'e', 'n', 'h',
+		'rshift', '/', '.', ',', 'm', 'k',
+		'rctrl', 'rpunc', 'space'
 	],
+};
+
+const keyDefinitions = {
+	tab: { text: '↹' },
+	lshift: { text: '⇑' },
+	rshift: { text: '⇑' },
+	lpunc: { text: '1?$' },
+	rpunc: { text: '1?$' },
+	lctrl: { text: 'ctrl' },
+	rctrl: { text: 'ctrl' },
+	arrows: { text: '←↓↑→' },
+	enter: { text: '↲' },
+	backspace: { text: '↤' },
 };
 
 const config = {
 	keys: {
-		left: keyPositions.left.map(text => ({text})),
-		right: keyPositions.right.map(text => ({text}))
+		left: keyPositions.left.map(text => ({
+			text,
+			...keyDefinitions[text]
+		})),
+		right: keyPositions.right.map(text => ({
+			text,
+			name: text,
+			...keyDefinitions[text]
+		})),
 	}
 };
 

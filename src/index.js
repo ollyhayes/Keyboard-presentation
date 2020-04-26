@@ -42,7 +42,8 @@ function updateKey(keys, key, update) {
 		'Enter': '↲',
 		'Backspace': '↤',
 		'Control': 'ctrl',
-		'Shift': '⇑'
+		'Shift': '⇑',
+		
 	};
 	const withText = eventToKey[key] || key;
 

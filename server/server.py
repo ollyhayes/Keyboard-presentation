@@ -6,11 +6,11 @@ queue = asyncio.Queue()
 
 def handle_key_down(event):
 	hm.printevent(event)
-	loop.call_soon_threadsafe(queue.put_nowait, str(event.ScanCode))
+	loop.call_soon_threadsafe(queue.put_nowait, event.Key)
 
 def handle_key_up(event):
 	hm.printevent(event)
-	loop.call_soon_threadsafe(queue.put_nowait, str(event.ScanCode))
+	loop.call_soon_threadsafe(queue.put_nowait, event.Key)
 
 async def serve(websocket, path):
 	print('websocket connected')
