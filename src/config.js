@@ -46,15 +46,16 @@ const config = {
 			text,
 			name: text,
 			...keyDefinitions[text],
-			puncText: puncKeyPositions[index]
+			puncText: puncKeyPositions.left[index]
 		})),
 		right: keyPositions.right.map((text, index) => ({
 			text,
 			name: text,
 			...keyDefinitions[text],
-			puncText: puncKeyPositions[index]
+			puncText: puncKeyPositions.right[index]
 		})),
-	}
+	},
+	currentLayer: 'colemak'
 };
 
 export default config;

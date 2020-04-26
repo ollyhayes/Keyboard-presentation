@@ -180,8 +180,15 @@ export function KeyboardSide({isLeft}) {
 	
 	return <g transform={transform}>
 		<path d={createPath(transformedPath)}/>
-		{ transformedKeys.map((key, index) => <Key key={index} {...key}/>) }
-	</g>;
+		{ 
+			transformedKeys.map((key, index) =>
+				<Key
+					key={index}
+					{...deduceCurrentText(key, state.currentLayer)}
+					currentLayer={state.currentLayer}
+				/>)
+		}
+		</g>;
 }
 
 function getKeyTransform(x, y, height, width, rotation) {
@@ -193,16 +200,25 @@ function getKeyTransform(x, y, height, width, rotation) {
 		: translate;
 }
 
-function Key({x, y, height, width, rotation, text, isPressed, bump}) {
+function deduceCurrentText(key, currentLayer) {
+	return {
+		...key,
+		currentText: currentLayer === 'punc'
+			? key.puncText
+			: key.text
+	};
+}
+
+function Key({x, y, height, width, rotation, currentText, isPressed, bump, currentLayer}) {
 	return <g className={'key' + (isPressed ? ' is-pressed' : '')} transform={getKeyTransform(x, y, height, width, rotation)}>
 		<rect x={-width / 2} y={-height / 2} width={width} height={height} />
 		<text 
 			textAnchor="middle" 
 			dominantBaseline="central"
 			style={{
-				fontSize: text.length === 1 ? '25px' : '16px',
+				fontSize: currentText.length === 1 ? '25px' : '16px',
 			}} >
-			{text}
+			{currentText}
 		</text>
 		{
 			bump

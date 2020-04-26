@@ -1,4 +1,4 @@
-export default function initialise(handleData) {
+export default function openSocket(handleData) {
 	// const socket = new WebSocket(`ws://${window.location.host}`);
 	const socket = new WebSocket(`ws://localhost:8765`);
 
