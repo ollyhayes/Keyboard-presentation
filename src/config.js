@@ -12,6 +12,20 @@ const keyPositions = {
 		'rctrl', 'rpunc', 'space'
 	],
 };
+const puncKeyPositions = {
+	left: [
+		'tab', '!', '"', '€', '$', '%',
+		'esc', '|', '¬', '[', ']', '~',
+		'lshift', '\\', '`', 'meta', 'alt', '#',
+		'lctrl', 'lpunc', 'arrows'
+	],
+	right: [
+		'backspace', ')', '(', '*', '&', '^',
+		'enter', '+', '-', '}', '{', '\'',
+		'rshift', '=', '_', 'meta', 'alt', '@',
+		'rctrl', 'rpunc', 'space'
+	],
+};
 
 const keyDefinitions = {
 	tab: { text: '↹' },
@@ -28,15 +42,17 @@ const keyDefinitions = {
 
 const config = {
 	keys: {
-		left: keyPositions.left.map(text => ({
+		left: keyPositions.left.map((text, index) => ({
 			text,
 			name: text,
-			...keyDefinitions[text]
+			...keyDefinitions[text],
+			puncText: puncKeyPositions[index]
 		})),
-		right: keyPositions.right.map(text => ({
+		right: keyPositions.right.map((text, index) => ({
 			text,
 			name: text,
-			...keyDefinitions[text]
+			...keyDefinitions[text],
+			puncText: puncKeyPositions[index]
 		})),
 	}
 };
