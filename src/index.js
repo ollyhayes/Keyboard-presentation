@@ -17,7 +17,7 @@ ReactDOM.render(
 
 initialiseSocket(json => {
 	const data = JSON.parse(json);
-	console.log(data);
+	console.log(Date.now(), data.key, data.isPressed);
 	
 	store.updateValue(state => ({
 		...state,
@@ -29,8 +29,8 @@ initialiseSocket(json => {
 	}))
 });
 
-document.addEventListener('keydown', event => handleKey(event, true));
-document.addEventListener('keyup', event => handleKey(event, false));
+// document.addEventListener('keydown', event => handleKey(event, true));
+// document.addEventListener('keyup', event => handleKey(event, false));
 
 function handleKey(event, isPressed) {
 	event.preventDefault();
@@ -54,13 +54,16 @@ function updateKey(keys, key, update) {
 		'comma': ',',
 		'slash': '/',
 		'period': '.',
-		'backslash': '\\',
+		'backslash': 'z',
 		'semicolon': ';',
 		'shift_l': 'lshift',
 		'shift_r': 'rshift',
 		'control_l': 'lctrl',
 		'control_r': 'rctrl',
 		'return': 'enter',
+		'[65329]': 'lpunc',
+		'[65332]': 'rpunc',
+		'atakana': 'arrows',
 	};
 	const withText = eventToKey[key] || key;
 

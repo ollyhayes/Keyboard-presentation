@@ -5,9 +5,12 @@ trails
 hack to highlight homerow
 	bumps on t & n
 dont swallow other keys
+connect in-browser events if the websocket doesn't connect
 
 layers
-python server
+	arrows
+	tab
+	python server
 
 electrum server
 reveal.js inside electrum?
