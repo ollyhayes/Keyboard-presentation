@@ -28,7 +28,7 @@ export function KeyboardSide({isLeft}) {
 		{ x: -301.9745, y: 104.8275 },
 		{ x: -248.1125, y: 91.3625 },
 		{ x: -194.2515, y: 84.6295 },
-		{ x: -140.3885, y: 91.3625 },
+		{ x: -140.3885, y: 91.3625, bump: true },
 		{ x: -86.5275, y: 98.0955 },
 
 
@@ -193,7 +193,7 @@ function getKeyTransform(x, y, height, width, rotation) {
 		: translate;
 }
 
-function Key({x, y, height, width, rotation, text, isPressed}) {
+function Key({x, y, height, width, rotation, text, isPressed, bump}) {
 	return <g className={'key' + (isPressed ? ' is-pressed' : '')} transform={getKeyTransform(x, y, height, width, rotation)}>
 		<rect x={-width / 2} y={-height / 2} width={width} height={height} />
 		<text 
@@ -204,5 +204,10 @@ function Key({x, y, height, width, rotation, text, isPressed}) {
 			}} >
 			{text}
 		</text>
+		{
+			bump
+				? <line x1="-6" x2="6" y1="16" y2="16"/>
+				: null
+		}
 	</g>;
 }
