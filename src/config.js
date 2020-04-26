@@ -30,6 +30,7 @@ const config = {
 	keys: {
 		left: keyPositions.left.map(text => ({
 			text,
+			name: text,
 			...keyDefinitions[text]
 		})),
 		right: keyPositions.right.map(text => ({

@@ -15,8 +15,18 @@ ReactDOM.render(
 	document.getElementById('root')
 );
 
-initialiseSocket(data => {
+initialiseSocket(json => {
+	const data = JSON.parse(json);
 	console.log(data);
+	
+	store.updateValue(state => ({
+		...state,
+		keys: {
+			...state.keys,
+			left: updateKey(state.keys.left, data.key, {isPressed: data.isPressed}),
+			right: updateKey(state.keys.right, data.key, {isPressed: data.isPressed})
+		}
+	}))
 });
 
 document.addEventListener('keydown', event => handleKey(event, true));
@@ -36,18 +46,25 @@ function handleKey(event, isPressed) {
 }
 
 function updateKey(keys, key, update) {
+	key = key.toLowerCase()
 	const eventToKey = {
-		'Escape': 'esc',
-		'Tab': '↹',
-		'Enter': '↲',
-		'Backspace': '↤',
-		'Control': 'ctrl',
-		'Shift': '⇑',
-		
+		'escape': 'esc',
+		'control': 'lctrl',
+		'shift': 'lshift',
+		'comma': ',',
+		'slash': '/',
+		'period': '.',
+		'backslash': '\\',
+		'semicolon': ';',
+		'shift_l': 'lshift',
+		'shift_r': 'rshift',
+		'control_l': 'lctrl',
+		'control_r': 'rctrl',
+		'return': 'enter',
 	};
 	const withText = eventToKey[key] || key;
 
-	return keys.map(key => key.text === withText
+	return keys.map(key => key.name === withText
 		? {...key, ...update}
 		: key)
 }

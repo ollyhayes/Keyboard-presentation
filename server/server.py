@@ -1,16 +1,16 @@
 import asyncio
 import websockets
+import json
 from pyxhook import HookManager
 
 queue = asyncio.Queue()
 
-def handle_key_down(event):
+def handle_key(event):
 	hm.printevent(event)
-	loop.call_soon_threadsafe(queue.put_nowait, event.Key)
-
-def handle_key_up(event):
-	hm.printevent(event)
-	loop.call_soon_threadsafe(queue.put_nowait, event.Key)
+	loop.call_soon_threadsafe(queue.put_nowait, json.dumps({
+		"key": event.Key,
+		"isPressed": event.MessageName == "key down"
+	}))
 
 async def serve(websocket, path):
 	print('websocket connected')
@@ -19,8 +19,8 @@ async def serve(websocket, path):
 		await websocket.send(message)
 
 hm = HookManager()
-hm.KeyDown = handle_key_down
-hm.KeyUp = handle_key_up
+hm.KeyDown = handle_key
+hm.KeyUp = handle_key
 hm.start()
 
 loop = asyncio.get_event_loop()
