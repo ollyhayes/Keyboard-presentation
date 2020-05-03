@@ -44,6 +44,10 @@ function deduceKeyName(key) {
 		'[65329]': 'lpunc',
 		'[65332]': 'rpunc',
 		'atakana': 'arrows',
+		'up': 'e',
+		'down': 'n',
+		'left': 'h',
+		'right': 'i'
 	};
 	return eventToKey[key] || key;
 }

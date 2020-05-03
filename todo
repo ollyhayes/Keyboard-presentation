@@ -6,6 +6,7 @@ hack to highlight homerow
 	bumps on t & n
 dont swallow other keys
 connect in-browser events if the websocket doesn't connect
+rilter out the reperts
 
 layers
 	arrows
