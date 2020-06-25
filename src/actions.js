@@ -20,6 +20,11 @@ function updateLayers(state, key, isPressed) {
 				...state,
 				currentLayer: isPressed ? 'punc' : 'colemak'
 			};
+		case 'arrows':
+			return {
+				...state,
+				currentLayer: isPressed ? 'arrows' : 'colemak'
+			};
 		default:
 			return state;
 	}

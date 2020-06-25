@@ -26,6 +26,20 @@ const puncKeyPositions = {
 		'rctrl', 'rpunc', 'space'
 	],
 };
+const arrKeyPositions = {
+	left: [
+		'', '', '', '', '', '',
+		'', '', '←', '↑', '↓', '→',
+		'', '', '', '', '', '',
+		'', '', ''
+	],
+	right: [
+		'', '', '', '', '', '',
+		'←', '↓', '↑', '→', '', '',
+		'', '', '', '', '', '',
+		'', '', ''
+	],
+}
 
 const keyDefinitions = {
 	tab: { text: '↹' },
@@ -46,13 +60,15 @@ const config = {
 			text,
 			name: text,
 			...keyDefinitions[text],
-			puncText: puncKeyPositions.left[index]
+			puncText: puncKeyPositions.left[index],
+			arrText: arrKeyPositions.left[index],
 		})),
 		right: keyPositions.right.map((text, index) => ({
 			text,
 			name: text,
 			...keyDefinitions[text],
-			puncText: puncKeyPositions.right[index]
+			puncText: puncKeyPositions.right[index],
+			arrText: arrKeyPositions.right[index],
 		})),
 	},
 	currentLayer: 'colemak'
