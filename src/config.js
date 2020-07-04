@@ -1,4 +1,4 @@
-import { map, toPairs, pipe, values, mergeAll, reduce, mapObjIndexed, zip, zipWith, addIndex } from "ramda";
+import { map, toPairs, pipe, values, mergeAll, reduce, mapObjIndexed, zip, zipWith, addIndex, mergeRight } from "ramda";
 
 const layerDefinitions = {
 	default: {
@@ -58,26 +58,19 @@ const keyDefinitions = {
 	backspace: { text: '↤' },
 };
 
-// const applyToLayer = callback => (layer, name) => ({
-// 		name,
-// 		...layer,
-// 		left: callback(layer.left),
-// 		right: callback(layer.right)
-// 	});
-
 const mapIndexed = addIndex(map);
 
+//bad name, applying what? pass definitions to make pure
 const applyToKeys = (keys, layerName) => mapIndexed((key, index) => ({
 		index,
 		name: key,
-		[`text-${layerName}`]: keyDefinitions[key]?.text || key
+		[`${layerName}Text`]: keyDefinitions[key]?.text || key
 }))(keys);
 
 const logAll = map(a => console.log('logging: ', a));
 
 const process = pipe(
 	mapObjIndexed((layer, name) => ({
-		name,
 		...layer,
 		left: applyToKeys(layer.left, name),
 		right: applyToKeys(layer.right, name)
@@ -86,49 +79,21 @@ const process = pipe(
 	reduce((keyboard, layer) => ({
 		...keyboard,
 		left: keyboard.left
-			? zipWith((left, right) => ({...left, ...right}), layer.left, keyboard.left)
+			? zipWith(mergeRight, layer.left, keyboard.left)
 			: layer.left,
 		right: keyboard.right
-			? zipWith((left, right) => ({...left, ...right}), layer.right, keyboard.right)
+			? zipWith(mergeRight, layer.right, keyboard.right)
 			: layer.right
 	}), {})
 );
 
 const keyboard = process(layerDefinitions);
-// apply defnition to each key in each half of each layer
-// merge keys of each layer to make one
-// const processLayer = map(
-// 	map(applyToLayer(keys => keys.map(substituteText(
 
 console.log(keyboard);
 
 const config = {
-	keys: {
-		left: [],
-		right: []
-	},
+	keys: keyboard,
 	currentLayer: 'colemak'
-	// keys: {
-	// 	left: keyPositions.left.map((name, index) => ({
-	// 		name,
-	// 		puncName: puncKeyPositions.left[index],
-	// 		arrName: arrKeyPositions.left[index],
-	// 	})).map(({name, puncName, arrName}) => ({
-	// 		text: keyDefinitions[name]?.text || name,
-	// 		puncText: keyDefinitions[puncName]?.text || name,
-	// 		arrText: keyDefinitions[arrName]?.text || name
-	// 	})),
-	// 	right: keyPositions.right.map((name, index) => ({
-	// 		name,
-	// 		puncName: puncKeyPositions.right[index],
-	// 		arrName: arrKeyPositions.right[index],
-	// 	})).map(({name, puncName, arrName}) => ({
-	// 		text: keyDefinitions[name]?.text || name,
-	// 		puncText: keyDefinitions[puncName]?.text || name,
-	// 		arrText: keyDefinitions[arrName]?.text || name
-	// 	})),
-	// },
-	// currentLayer: 'colemak'
 };
 
 export default config;
