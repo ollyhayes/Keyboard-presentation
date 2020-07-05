@@ -32,6 +32,7 @@ function updateLayers(state, key, isPressed) {
 
 function deduceKeyName(key) {
 	key = key.toLowerCase()
+	// should really map to index here instead of default layer key
 	const eventToKey = {
 		'escape': 'esc',
 		'control': 'lctrl',
@@ -45,6 +46,10 @@ function deduceKeyName(key) {
 		'shift_r': 'rshift',
 		'control_l': 'lctrl',
 		'control_r': 'rctrl',
+		'super_l': 'c',
+		'super_r': '.',
+		'alt_l': 'v',
+		'alt_r': 'm',
 		'return': 'enter',
 		'[65329]': 'lpunc',
 		'[65332]': 'rpunc',

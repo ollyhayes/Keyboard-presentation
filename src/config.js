@@ -17,30 +17,30 @@ const layerDefinitions = {
 	},
 	punc: {
 		left: [
-			'tab', '!', '"', '€', '$', '%',
-			'esc', '|', '¬', '[', ']', '~',
-			'lshift', '\\', '`', 'meta', 'alt', '#',
-			'lctrl', 'lpunc', 'arrows'
+			'', '!', '"', '€', '$', '%',
+			'', '|', '¬', '[', ']', '~',
+			'', '\\', '`', 'lmeta', 'lalt', '#',
+			'', '', ''
 		],
 		right: [
-			'backspace', ')', '(', '*', '&', '^',
-			'enter', '+', '-', '}', '{', '\'',
-			'rshift', '=', '_', 'meta', 'alt', '@',
-			'rctrl', 'rpunc', 'space'
+			'', ')', '(', '*', '&', '^',
+			'', '+', '-', '}', '{', '\'',
+			'', '=', '_', 'rmeta', 'ralt', '@',
+			'', '', ''
 		],
 	},
 	arr: {
 		left: [
-			'', '', '', '', '', '',
-			'', '', '←', '↑', '↓', '→',
-			'', '', '', '', '', '',
-			'', '', 'arrows'
+			'', '', 'home', 'pgdn', 'pgup', 'end',
+			'', 'del', '←', '↑', '↓', '→',
+			'', 'ins', 'c←', 'lmeta', 'lalt', 'c→',
+			'', 'F12', ''
 		],
 		right: [
-			'', '', '', '', '', '',
-			'', '', '→', '↑', '↓', '←',
-			'', '', '', '', '', '',
-			'', '', ''
+			'', '', 'home', 'pgdn', 'pgup', 'end',
+			'', 'del', '→', '↑', '↓', '←',
+			'', 'ins', 'c→', '↑↑↑↑', '↓↓↓↓', 'c←',
+			'', 'F12', ''
 		],
 	}
 };
@@ -53,6 +53,10 @@ const keyDefinitions = {
 	rpunc: { text: '!?$' },
 	lctrl: { text: 'ctrl' },
 	rctrl: { text: 'ctrl' },
+	lalt: { text: 'alt' },
+	ralt: { text: 'alt' },
+	lmeta: { text: 'meta' },
+	rmeta: { text: 'meta' },
 	arrows: { text: '←↓↑→' },
 	enter: { text: '↲' },
 	backspace: { text: '↤' },

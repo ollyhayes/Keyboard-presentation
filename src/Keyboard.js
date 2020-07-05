@@ -204,9 +204,9 @@ function getKeyTransform(x, y, height, width, rotation) {
 function deduceCurrentText(key, currentLayer) {
 	return {
 		...key,
-		currentText: currentLayer === 'punc'
+		currentText: currentLayer === 'punc' && key.puncText
 			? key.puncText
-			: currentLayer === 'arrows'
+			: currentLayer === 'arrows' && key.arrText
 				? key.arrText
 				: key.defaultText
 	};
