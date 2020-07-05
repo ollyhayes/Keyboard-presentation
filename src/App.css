@@ -13,20 +13,22 @@ html,body,svg
 }
 
 g.key rect {
-  transition: fill 0.15s;
+  transition: fill 0.5s;
   fill: transparent;
 }
 g.key.is-pressed rect {
+  transition: none;
   fill: red;
 }
 
 g.key text {
-  transition: fill 0.15s, stroke 0.15s;
+  transition: fill 0.5s, stroke 0.5s;
   fill: black;
   stroke: none;
   font-family: monospace;
 }
 g.key.is-pressed text {
+  transition: none;
   fill: white;
   stroke: none;
 }

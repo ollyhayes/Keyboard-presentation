@@ -31,13 +31,13 @@ const layerDefinitions = {
 	},
 	arr: {
 		left: [
-			'', '', 'home', 'pgdn', 'pgup', 'end',
+			'', '', 'home', 'pgd', 'pgu', 'end',
 			'', 'del', '←', '↑', '↓', '→',
 			'', 'ins', 'c←', 'lmeta', 'lalt', 'c→',
 			'', 'F12', ''
 		],
 		right: [
-			'', '', 'home', 'pgdn', 'pgup', 'end',
+			'', '', 'home', 'pgd', 'pgu', 'end',
 			'', 'del', '→', '↑', '↓', '←',
 			'', 'ins', 'c→', '↑↑↑↑', '↓↓↓↓', 'c←',
 			'', 'F12', ''

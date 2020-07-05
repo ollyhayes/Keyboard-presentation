@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from './store.js'
+import classNames from 'classnames';
 
 export default function Keyboard() {
 	return <svg className="keyboard"  viewBox="-400 0 800 400">
@@ -213,7 +214,7 @@ function deduceCurrentText(key, currentLayer) {
 }
 
 function Key({x, y, height, width, rotation, currentText, isPressed, bump, currentLayer}) {
-	return <g className={'key' + (isPressed ? ' is-pressed' : '')} transform={getKeyTransform(x, y, height, width, rotation)}>
+	return <g className={classNames('key', {"is-pressed": isPressed})} transform={getKeyTransform(x, y, height, width, rotation)}>
 		<rect x={-width / 2} y={-height / 2} width={width} height={height} />
 		<text 
 			textAnchor="middle" 
