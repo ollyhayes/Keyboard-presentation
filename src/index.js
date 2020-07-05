@@ -18,7 +18,7 @@ ReactDOM.render(
 
 openSocket(json => {
 	const data = JSON.parse(json);
-	console.log(Date.now(), data.key, data.isPressed);
+	// console.log(Date.now(), data.key, data.isPressed);
 	
 	updateKeyState(store, data.key, data.isPressed);
 });

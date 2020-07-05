@@ -1,3 +1,8 @@
+:root {
+  --slow-transition: 0.3s;
+  --fast-transition: 0.1s;
+}
+
 html,body,svg
 {
     height:100%;
@@ -13,16 +18,18 @@ html,body,svg
 }
 
 g.key rect {
-  transition: fill 0.5s;
-  fill: transparent;
+  transition: fill-opacity var(--slow-transition), fill var(--fast-transition);
+  fill: grey;
+  fill-opacity: 0;
 }
 g.key.is-pressed rect {
   transition: none;
   fill: red;
+  fill-opacity: 1;
 }
 
 g.key text {
-  transition: fill 0.5s, stroke 0.5s;
+  transition: fill var(--slow-transition), stroke var(--slow-transition);
   fill: black;
   stroke: none;
   font-family: monospace;
