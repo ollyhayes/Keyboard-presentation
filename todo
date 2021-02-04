@@ -1,19 +1,82 @@
-	monoscpace
-	utf labels
-	colour transitions
-trails
-hack to highlight homerow
-	bumps on t & n
-dont swallow other keys
-connect in-browser events if the websocket doesn't connect
-rilter out the reperts
+old
+		monoscpace
+		utf labels
+		colour transitions
+		trails
+		bumps on t & n
+	connect in-browser events if the websocket doesn't connect
+	not sure what these ones are all about
+		dont swallow other keys
+		rilter out the reperts
 
-layers
-	arrows
-	tab
-	python server
+	layers
+		arrows
+		tab
+		python server
 
+	reveal.js inside electrum?
+	electrum server
+
+home/end the wrong way round
+alt tab key
+enter key on arrow row
 colour code the layers
+colour alpha keys differently
+hack to highlight homerow
+switch to capital letters on shift?
+take the regular qwerty keyboard from the html table here: https://en.wikipedia.org/wiki/Computer_keyboard
+try getting rid of (or translucify) the plate boarder and make each button bigger to the size of the keycap instead of the switch hole?
 
-reveal.js inside electrum?
-electrum server
+ligtning talk:
+	surely there is already some default keymap that everyone should use?
+	what's wrong with the default keymap
+		one shift/ctrl/alt/layer switch keys etc
+			why it's important to have two
+		control awkward
+		never forced chords
+		use mouse? one hand keyboard
+		everyone seems to make their own
+	my keymap - layout I've been using for a few years, though still a work in progress
+		two of any modifier key
+			copy paste etc - show copy/pasting words around with double clicking
+		punctuation layer - show template strings, show =>
+		alt-tab
+		movement keys
+	
+actual presentation:
+	why is it like this?
+		show a normal keyboard
+			awkward ctrl-r, copy paste, alt-tab etc
+				brackets far away
+		show the default keymap
+			one shift/ctrl/alt etc
+		split
+		orthogonal
+		colemak
+		40%
+
+	thumb cluster
+		ctrl position, cut/paste etc
+
+	movement keys
+		triple/ctrl down/up/left/right
+			should I have some sort of test document to move around?
+			that trello link that requires multidown
+			bios boot order things etc
+		home/end etc
+		windows and alt things
+			moving windows around
+			browser/slack/ide back & forward
+
+	punctuation layers
+		template strings
+		- & ' being on a layer, but it's fine
+		alt tab
+	
+	number keys
+
+	media keys
+
+	left handed use
+
+	why I don't have special layer-triggering alpha keys
