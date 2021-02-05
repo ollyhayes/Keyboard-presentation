@@ -29,8 +29,8 @@ h = hid.enumerate()
 print("HID info=", json.dumps(
     [
         { k: str(v) for k, v in device.items() }
-        for device
-        in h
+        for device in h
+        if "crkbd" in device["product_string"]
     ], indent=4))
 
 # get path of first item
@@ -45,23 +45,31 @@ print(f"Path={path} Vid={vid} Pid={pid}")
 try:
 
     # using path works on raw, not non-raw
-    #    d=hid.Device(path=path)
-    #    print("Opened device=", path)
+    d=hid.Device(path=path)
+    print("Opened device=", path)
 
-    d = hid.Device(vid=vid, pid=pid)
-    print("Opened device=", vid, pid)
+    # device = hid.Device(vid=vid, pid=pid)
+    # print("Opened device=", vid, pid)
+
+    device.write("hello")
+
+    device.read(5)
+
+    device.close()
+
 
     # -- TBD
     # r=d.get_feature_report(1, 1024)
     # print("Report=", r)
 
     # loop rading the keyboard....
-    done = 0
-    while done == 0:
-        r = d.read(10)
-        for c in r:
-            x = ord(c)
-            print("read=", x)
+    # done = 0
+    # while done == 0:
+    #     r = d.read(10)
+    #     for c in r:
+    #         x = ord(c)
+    #         print("read=", x)
+    
 
 except Exception as e:
     print("Exception, e=", e)
