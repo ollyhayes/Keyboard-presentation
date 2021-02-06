@@ -1,13 +1,23 @@
 
-export function updateKeyState(store, key, isPressed) {
-	const keyName = deduceKeyName(key);
+export function updateKeyState(store, isLeft, index, isPressed) {
+	// const keyName = deduceKeyName(key);
 	store.updateValue(state => ({
 		...state,
-		...updateLayers(state, keyName, isPressed),
+		// ...updateLayers(state, keyName, isPressed),
 		keys: {
 			...state.keys,
-			left: updateKeys(state.keys.left, keyName, {isPressed}),
-			right: updateKeys(state.keys.right, keyName, {isPressed})
+			left: isLeft
+				? state.keys.left.map((key, keyIndex) =>
+					index === keyIndex
+						? {...key, isPressed }
+						: key)
+				: state.keys.left,
+			right: !isLeft
+				? state.keys.right.map((key, keyIndex) =>
+					index === keyIndex
+						? {...key, isPressed }
+						: key)
+				: state.keys.right,
 		}
 	}))
 }

@@ -15,6 +15,9 @@ tty = io.TextIOWrapper(
 	"r+")
 )
 
+# for line in iter(tty.readline, None):
+# 	print(line.strip())
+
 loop = asyncio.get_event_loop()
 asyncio.get_event_loop().run_until_complete(websockets.serve(serve, 'localhost', 8765))
 asyncio.get_event_loop().run_forever()

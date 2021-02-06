@@ -16,18 +16,18 @@ ReactDOM.render(
 	document.getElementById('root')
 );
 
-openSocket(json => {
-	const data = JSON.parse(json);
-	// console.log(Date.now(), data.key, data.isPressed);
+openSocket(data => {
+	const [direction, row, column] = data;
+	const isPressed = direction === "P";
+	const isLeft = row <= 3;
+	const index = +column + (row % 4) * 6
+
+	// take account the last row having high column indices
 	
-	updateKeyState(store, data.key, data.isPressed);
+	updateKeyState(store, isLeft, index, isPressed);
+
+	// console.log(Date.now(), isLeft, index, isPressed);
 });
 
 // document.addEventListener('keydown', event => handleKey(event, true));
 // document.addEventListener('keyup', event => handleKey(event, false));
-
-function handleKey(event, isPressed) {
-	event.preventDefault();
-
-	updateKeyState(store, event.key, isPressed);
-}
