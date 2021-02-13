@@ -14,19 +14,21 @@ ReactDOM.render(
 		<App/>
 	</Provider>,
 	document.getElementById('root')
-);
+)
+
+const initialOffset = 40;
+const releaseOffset = 50;
+const righthandOffset = 24;
 
 openSocket(keyCode => {
-	keyCode -= 40;
-	const isPressed = keyCode < 50;
-	keyCode %= 50;
+	keyCode -= initialOffset;
+	const isPressed = keyCode < releaseOffset;
+	keyCode %= releaseOffset;
 
-	const isLeft = keyCode < 24;
-	keyCode %= 24;
+	const isLeft = keyCode < righthandOffset;
+	keyCode %= righthandOffset;
 
-	keyCode = keyCode >= 21 ? keyCode - 3 : keyCode;
-	
-	// // take account the last row having high column indices
+	keyCode = keyCode >= 21 ? keyCode - 3 : keyCode; // thumb keys are offset by three (because we're using the column to build the index)
 	
 	updateKeyState(store, isLeft, keyCode, isPressed);
 	console.log(Date.now(), isLeft, keyCode, isPressed);
