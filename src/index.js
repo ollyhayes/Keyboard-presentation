@@ -18,15 +18,14 @@ ReactDOM.render(
 
 openSocket(keyCode => {
 	keyCode -= 40;
-	const isPressed = keyCode < 40;
-	keyCode %= 40;
+	const isPressed = keyCode < 50;
+	keyCode %= 50;
 
 	const isLeft = keyCode < 24;
 	keyCode %= 24;
 
 	keyCode = keyCode >= 21 ? keyCode - 3 : keyCode;
 	
-
 	// // take account the last row having high column indices
 	
 	updateKeyState(store, isLeft, keyCode, isPressed);
