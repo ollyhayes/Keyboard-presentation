@@ -16,15 +16,27 @@ ReactDOM.render(
 	document.getElementById('root')
 );
 
-openSocket(data => {
-	const [direction, row, column] = data;
-	const isPressed = direction === "P";
-	const isLeft = row <= 3;
-	const index = +column + (row % 4) * 6
+openSocket(keyCode => {
+	keyCode -= 40;
+	const isPressed = keyCode < 40;
+	keyCode %= 40;
 
-	// take account the last row having high column indices
+	const isLeft = keyCode < 24;
+	keyCode %= 24;
 	
-	updateKeyState(store, isLeft, index, isPressed);
+	console.log(keyCode);
+
+	// const [direction, row, column] = data;
+	// const isPressed = direction === "P";
+	// const isLeft = row <= 3;
+	// const index = +column + (row % 4) * 6
+
+	// // take account the last row having high column indices
+	
+	updateKeyState(store, isLeft, keyCode, isPressed);
+
+
+
 
 	// console.log(Date.now(), isLeft, index, isPressed);
 });
