@@ -2,7 +2,7 @@
 export function updateKeyState(store, isLeft, index, isPressed) {
 	store.updateValue(state => ({
 		...state,
-		// ...updateLayers(state, keyName, isPressed),
+		...updateLayers(state, isLeft, index, isPressed),
 		keys: {
 			...state.keys,
 			left: isLeft ? updateKey(state.keys.left, index, isPressed) : state.keys.left,
@@ -18,20 +18,17 @@ function updateKey(keys, index, isPressed) {
 			: key)
 }
 
-function updateLayers(state, key, isPressed) {
-	switch (key) {
-		case 'lpunc':
-		case 'rpunc':
-			return {
-				...state,
+function updateLayers(state, isLeft, index, isPressed) {
+	if (index === 19)
+		return {
+			...state,
 				currentLayer: isPressed ? 'punc' : 'colemak'
-			};
-		case 'arrows':
-			return {
-				...state,
+		};
+	else if (index === 20 && isLeft === true)
+		return {
+			...state,
 				currentLayer: isPressed ? 'arrows' : 'colemak'
-			};
-		default:
-			return state;
-	}
+		};
+	else
+		return state;
 }
