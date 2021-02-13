@@ -29,6 +29,11 @@ function updateLayers(state, isLeft, index, isPressed) {
 			...state,
 				currentLayer: isPressed ? 'arrows' : 'colemak'
 		};
+	else if (index === 0 && isLeft === true)
+		return {
+			...state,
+				currentLayer: isPressed ? 'num' : 'colemak'
+		};
 	else
 		return state;
 }

@@ -209,7 +209,9 @@ function deduceCurrentText(key, currentLayer) {
 			? key.puncText
 			: currentLayer === 'arrows' && key.arrText
 				? key.arrText
-				: key.defaultText
+				: currentLayer === 'num' && key.numText
+					? key.numText
+					: key.defaultText
 	};
 }
 
