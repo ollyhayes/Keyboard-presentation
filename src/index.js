@@ -23,22 +23,14 @@ openSocket(keyCode => {
 
 	const isLeft = keyCode < 24;
 	keyCode %= 24;
-	
-	console.log(keyCode);
 
-	// const [direction, row, column] = data;
-	// const isPressed = direction === "P";
-	// const isLeft = row <= 3;
-	// const index = +column + (row % 4) * 6
+	keyCode = keyCode >= 21 ? keyCode - 3 : keyCode;
+	
 
 	// // take account the last row having high column indices
 	
 	updateKeyState(store, isLeft, keyCode, isPressed);
-
-
-
-
-	// console.log(Date.now(), isLeft, index, isPressed);
+	console.log(Date.now(), isLeft, keyCode, isPressed);
 });
 
 // document.addEventListener('keydown', event => handleKey(event, true));
