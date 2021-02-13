@@ -15,6 +15,20 @@ const layerDefinitions = {
 			'rctrl', 'rpunc', 'space'
 		],
 	},
+	qwerty: {
+		left: [
+			'tab', 'q', 'w', 'e', 'r', 't',
+			'esc', 'a', 's', 'd', 'f', 'g',
+			'lshift', 'z', 'x', 'c', 'v', 'b',
+			'lctrl', 'lpunc', 'arrows'
+		],
+		right: [
+			'backspace', 'p', 'o', 'i', 'u', 'y',
+			'enter', ';', 'l', 'k', 'j', 'h',
+			'rshift', '/', '.', ',', 'm', 'n',
+			'rctrl', 'rpunc', 'space'
+		],
+	},
 	punc: {
 		left: [
 			'', '!', '"', '€', '$', '%',

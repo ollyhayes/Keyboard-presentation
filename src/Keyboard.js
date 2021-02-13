@@ -211,6 +211,7 @@ function deduceCurrentText(key, currentLayer) {
 				? key.arrText
 				: currentLayer === 'num' && key.numText
 					? key.numText
+					// : key.qwertyText
 					: key.defaultText
 	};
 }
