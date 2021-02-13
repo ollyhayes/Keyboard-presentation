@@ -19,17 +19,17 @@ function updateKey(keys, index, isPressed) {
 }
 
 function updateLayers(state, isLeft, index, isPressed) {
-	if (index === 19)
+	if (index === 19 && (state.currentLayer === 'colemak' || state.currentLayer === 'punc'))
 		return {
 			...state,
 				currentLayer: isPressed ? 'punc' : 'colemak'
 		};
-	else if (index === 20 && isLeft === true)
+	else if (index === 20 && isLeft === true && (state.currentLayer === 'colemak' || state.currentLayer === 'arrows'))
 		return {
 			...state,
 				currentLayer: isPressed ? 'arrows' : 'colemak'
 		};
-	else if (index === 0 && isLeft === true)
+	else if (index === 0 && isLeft === true && (state.currentLayer === 'colemak' || state.currentLayer === 'num'))
 		return {
 			...state,
 				currentLayer: isPressed ? 'num' : 'colemak'
