@@ -205,27 +205,29 @@ function getKeyTransform(x, y, height, width, rotation) {
 function deduceCurrentText(key, currentLayer) {
 	return {
 		...key,
-		currentText: currentLayer === 'punc' && key.puncText
-			? key.puncText
-			: currentLayer === 'arrows' && key.arrText
-				? key.arrText
-				: currentLayer === 'num' && key.numText
-					? key.numText
-					// : key.qwertyText
-					: key.defaultText
+		...currentLayer === 'punc' && key.punc
+			? key.punc
+			: currentLayer === 'arrows' && key.arr
+				? key.arr
+				: currentLayer === 'num' && key.num
+					? key.num
+					// : key.qwerty
+					: key.default
 	};
 }
 
-function Key({x, y, height, width, rotation, currentText, isPressed, bump, currentLayer}) {
-	return <g className={classNames('key', {"is-pressed": isPressed})} transform={getKeyTransform(x, y, height, width, rotation)}>
-		<rect x={-width / 2} y={-height / 2} width={width} height={height} />
+function Key({x, y, height, width, rotation, text, isPressed, bump, colour, currentLayer}) {
+	return <g
+		className={classNames('key', {"is-pressed": isPressed})}
+		transform={getKeyTransform(x, y, height, width, rotation)}>
+		<rect x={-width / 2} y={-height / 2} width={width} height={height} stroke={colour}/>
 		<text 
 			textAnchor="middle" 
 			dominantBaseline="central"
 			style={{
-				fontSize: currentText.length === 1 ? '25px' : '16px',
+				fontSize: text.length === 1 ? '25px' : '16px',
 			}} >
-			{currentText}
+			{text}
 		</text>
 		{
 			bump

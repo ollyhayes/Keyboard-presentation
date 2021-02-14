@@ -90,13 +90,22 @@ const keyDefinitions = {
 	backspace: { text: '↤' },
 };
 
+function keyToColour(key) {
+	return /^[a-z]$/.test(key)
+		? "blue"
+		: "black";
+}
+
 const mapIndexed = addIndex(map);
 
 //bad name, applying what? pass definitions to make pure
 const applyToKeys = (keys, layerName) => mapIndexed((key, index) => ({
 		index,
 		name: key,
-		[`${layerName}Text`]: keyDefinitions[key]?.text || key
+		[layerName]: {
+			text: keyDefinitions[key]?.text || key,
+			colour: keyToColour(keyDefinitions[key]?.text || key)
+		}
 }))(keys);
 
 const logAll = map(a => console.log('logging: ', a));
