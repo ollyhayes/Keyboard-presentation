@@ -29,7 +29,7 @@ async def send_codes():
 
 def receive_keycodes():
 	ttyACM = io.FileIO(
-		os.open("/dev/ttyACM1", os.O_NOCTTY | os.O_RDWR),
+		os.open("/dev/ttyACM0", os.O_NOCTTY | os.O_RDWR),
 		"r+")
 	tty.setcbreak(ttyACM.fileno())
 
