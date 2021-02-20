@@ -205,11 +205,11 @@ function getKeyTransform(x, y, height, width, rotation) {
 function deduceCurrentText(key, currentLayer) {
 	return {
 		...key,
-		...currentLayer === 'punc' && key.punc
+		...currentLayer === 'punc' && key.punc.text
 			? key.punc
-			: currentLayer === 'arrows' && key.arr
+			: currentLayer === 'arrows' && key.arr.text
 				? key.arr
-				: currentLayer === 'num' && key.num
+				: currentLayer === 'num' && key.num.text
 					? key.num
 					// : key.qwerty
 					: key.default
