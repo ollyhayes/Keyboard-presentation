@@ -216,9 +216,9 @@ function deduceCurrentText(key, currentLayer) {
 	};
 }
 
-function Key({x, y, height, width, rotation, text, isPressed, bump, layerName, currentLayer}) {
+function Key({x, y, height, width, rotation, text, isPressed, bump, layerName, layerSwitching, currentLayer}) {
 	return <g
-		className={classNames('key', {"is-pressed": isPressed}, layerName)}
+		className={classNames('key', {"is-pressed": isPressed}, layerSwitching ?? layerName)}
 		transform={getKeyTransform(x, y, height, width, rotation)}>
 		<rect class="category-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>
 		<rect class="click-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>

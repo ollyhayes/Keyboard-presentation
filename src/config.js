@@ -31,7 +31,7 @@ const layerDefinitions = {
 	},
 	punc: {
 		left: [
-			'', '!', '"', '€', '$', '%',
+			'a/t', '!', '"', '€', '$', '%',
 			'', '|', '¬', '[', ']', '~',
 			'', '\\', '`', 'lmeta', 'lalt', '#',
 			'', '', ''
@@ -74,18 +74,18 @@ const layerDefinitions = {
 };
 
 const keyDefinitions = {
-	tab: { text: '↹', category: "numbers"},
+	tab: { text: '↹', category: "numbers", layerSwitching: "num"},
 	lshift: { text: '⇑', category: "alpha" },
 	rshift: { text: '⇑', category: "alpha" },
-	lpunc: { text: '!?$', category: "punc" },
-	rpunc: { text: '!?$', category: "punc" },
+	lpunc: { text: '!?$', category: "punc", layerSwitching: "punc" },
+	rpunc: { text: '!?$', category: "punc", layerSwitching: "punc" },
 	lctrl: { text: 'ctrl', category: "control" },
 	rctrl: { text: 'ctrl', category: "control" },
 	lalt: { text: 'alt', category: "control" },
 	ralt: { text: 'alt', category: "control" },
 	lmeta: { text: 'meta', category: "control" },
 	rmeta: { text: 'meta', category: "control" },
-	arrows: { text: '←↓↑→', category: "control" },
+	arrows: { text: '←↓↑→', category: "control", layerSwitching: "arr" },
 	enter: { text: '↲', category: "control" },
 	backspace: { text: '↤', category: "control" },
 };
@@ -108,6 +108,7 @@ const applyToKeys = (keys, layerName) => mapIndexed((key, index) => ({
 		[layerName]: {
 			text: keyDefinitions[key]?.text ?? key,
 			keyCategory: keyToCategory(key),
+			layerSwitching: keyDefinitions[key]?.layerSwitching,
 			layerName
 		}
 }))(keys);
