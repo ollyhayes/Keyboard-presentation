@@ -3,6 +3,9 @@
   --fast-transition: 0.1s;
 
   --alpha: blue;
+  --numbers: green;
+  --control: yellow;
+  --punc: orange;
 }
 
 html,body,svg
@@ -41,6 +44,7 @@ g.key.is-pressed text {
   fill: white;
   stroke: none;
 }
-g.key.alpha rect {
-  stroke: var(--alpha);
-}
+g.key.alpha rect { stroke: var(--alpha); }
+g.key.punc rect { stroke: var(--punc); }
+g.key.numbers rect { stroke: var(--numbers); }
+g.key.control rect { stroke: var(--control); }
