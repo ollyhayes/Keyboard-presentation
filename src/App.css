@@ -44,7 +44,7 @@ g.key.is-pressed text {
   fill: white;
   stroke: none;
 }
-g.key.alpha rect.category-indicator { fill: var(--alpha); }
+g.key.default,g.key.colemak rect.category-indicator { fill: var(--alpha); }
 g.key.punc rect.category-indicator { fill: var(--punc); }
-g.key.numbers rect.category-indicator { fill: var(--numbers); }
-g.key.control rect.category-indicator { fill: var(--control); }
+g.key.num rect.category-indicator { fill: var(--numbers); }
+g.key.arr rect.category-indicator { fill: var(--control); }

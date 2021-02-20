@@ -107,7 +107,8 @@ const applyToKeys = (keys, layerName) => mapIndexed((key, index) => ({
 		name: key,
 		[layerName]: {
 			text: keyDefinitions[key]?.text ?? key,
-			keyCategory: keyToCategory(key)
+			keyCategory: keyToCategory(key),
+			layerName
 		}
 }))(keys);
 
