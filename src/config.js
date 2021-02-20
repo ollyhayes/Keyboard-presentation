@@ -90,10 +90,10 @@ const keyDefinitions = {
 	backspace: { text: '↤' },
 };
 
-function keyToColour(key) {
+function keyToCategory(key) {
 	return /^[a-z]$/.test(key)
-		? "blue"
-		: "black";
+		? "alpha"
+		: "default";
 }
 
 const mapIndexed = addIndex(map);
@@ -104,7 +104,7 @@ const applyToKeys = (keys, layerName) => mapIndexed((key, index) => ({
 		name: key,
 		[layerName]: {
 			text: keyDefinitions[key]?.text || key,
-			colour: keyToColour(keyDefinitions[key]?.text || key)
+			keyCategory: keyToCategory(keyDefinitions[key]?.text || key)
 		}
 }))(keys);
 

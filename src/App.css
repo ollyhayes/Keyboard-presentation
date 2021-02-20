@@ -1,6 +1,8 @@
 :root {
   --slow-transition: 0.3s;
   --fast-transition: 0.1s;
+
+  --alpha: blue;
 }
 
 html,body,svg
@@ -38,4 +40,7 @@ g.key.is-pressed text {
   transition: none;
   fill: white;
   stroke: none;
+}
+g.key.alpha rect {
+  stroke: var(--alpha);
 }

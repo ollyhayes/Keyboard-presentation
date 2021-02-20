@@ -216,11 +216,11 @@ function deduceCurrentText(key, currentLayer) {
 	};
 }
 
-function Key({x, y, height, width, rotation, text, isPressed, bump, colour, currentLayer}) {
+function Key({x, y, height, width, rotation, text, isPressed, bump, keyCategory, currentLayer}) {
 	return <g
-		className={classNames('key', {"is-pressed": isPressed})}
+		className={classNames('key', {"is-pressed": isPressed}, keyCategory)}
 		transform={getKeyTransform(x, y, height, width, rotation)}>
-		<rect x={-width / 2} y={-height / 2} width={width} height={height} stroke={colour}/>
+		<rect x={-width / 2} y={-height / 2} width={width} height={height}/>
 		<text 
 			textAnchor="middle" 
 			dominantBaseline="central"
