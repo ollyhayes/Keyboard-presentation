@@ -220,7 +220,8 @@ function Key({x, y, height, width, rotation, text, isPressed, bump, keyCategory,
 	return <g
 		className={classNames('key', {"is-pressed": isPressed}, keyCategory)}
 		transform={getKeyTransform(x, y, height, width, rotation)}>
-		<rect x={-width / 2} y={-height / 2} width={width} height={height}/>
+		<rect class="category-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>
+		<rect class="click-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>
 		<text 
 			textAnchor="middle" 
 			dominantBaseline="central"

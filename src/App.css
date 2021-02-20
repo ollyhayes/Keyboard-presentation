@@ -22,12 +22,12 @@ html,body,svg
   fill: none;
 }
 
-g.key rect {
+g.key rect.click-indicator {
   transition: fill-opacity var(--slow-transition), fill var(--fast-transition);
   fill: grey;
   fill-opacity: 0;
 }
-g.key.is-pressed rect {
+g.key.is-pressed rect.click-indicator {
   transition: none;
   fill: red;
   fill-opacity: 1;
@@ -44,7 +44,7 @@ g.key.is-pressed text {
   fill: white;
   stroke: none;
 }
-g.key.alpha rect { stroke: var(--alpha); }
-g.key.punc rect { stroke: var(--punc); }
-g.key.numbers rect { stroke: var(--numbers); }
-g.key.control rect { stroke: var(--control); }
+g.key.alpha rect.category-indicator { fill: var(--alpha); }
+g.key.punc rect.category-indicator { fill: var(--punc); }
+g.key.numbers rect.category-indicator { fill: var(--numbers); }
+g.key.control rect.category-indicator { fill: var(--control); }
