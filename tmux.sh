@@ -1,6 +1,9 @@
+#!/bin/bash
+
 cd ~/tools/keyboard-presentation
 
-tmux new-session -A -s launched-programs # connect to existing session if it exists
+# we don't do this now, just attach to whatever was the last tmux
+# tmux new-session -ds launched-programs # create session called main (fail if already there)
 
 tmux new-window -n keyboard-presentation "npm run start"
 tmux send-keys yes enter
