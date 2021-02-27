@@ -35,6 +35,8 @@ def receive_keycodes():
 
 	while True:
 		code = str(int.from_bytes(ttyACM.read(1), "big"))
+		if code == 0:
+			exit()
 		loop.call_soon_threadsafe(queue.put_nowait, code)
 
 receive_thread = Thread(target=receive_keycodes)
