@@ -2,10 +2,10 @@
   --slow-transition: 0.3s;
   --fast-transition: 0.1s;
 
-  --alpha: #e9c46a;
-  --numbers: #2a9d8f;
-  --control: #e76f51;
-  --punc: #f4a261;
+  --alpha: #ffffff;
+  --numbers: #baffb4;
+  --control: #ffc3b4;
+  --punc: #ffb5ff;
 }
 
 html,body,svg
