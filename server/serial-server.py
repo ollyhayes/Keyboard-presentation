@@ -35,7 +35,8 @@ def receive_keycodes():
 
 	while True:
 		code = str(int.from_bytes(ttyACM.read(1), "big"))
-		if code == 0:
+		if code == "0":
+			print("null character found, exiting!")
 			exit()
 		loop.call_soon_threadsafe(queue.put_nowait, code)
 
