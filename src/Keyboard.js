@@ -205,32 +205,37 @@ function getKeyTransform(x, y, height, width, rotation) {
 function deduceCurrentText(key, currentLayer) {
 	return {
 		...key,
-		currentText: currentLayer === 'punc' && key.puncText
-			? key.puncText
-			: currentLayer === 'arrows' && key.arrText
-				? key.arrText
-				: currentLayer === 'num' && key.numText
-					? key.numText
-					// : key.qwertyText
-					: key.defaultText
+		...currentLayer === 'punc' && key.punc.text
+			? key.punc
+			: currentLayer === 'arrows' && key.arr.text
+				? key.arr
+				: currentLayer === 'num' && key.num.text
+					? key.num
+					// : key.qwerty
+					: key.default
 	};
 }
 
-function Key({x, y, height, width, rotation, currentText, isPressed, bump, currentLayer}) {
-	return <g className={classNames('key', {"is-pressed": isPressed})} transform={getKeyTransform(x, y, height, width, rotation)}>
-		<rect x={-width / 2} y={-height / 2} width={width} height={height} />
-		<text 
-			textAnchor="middle" 
-			dominantBaseline="central"
-			style={{
-				fontSize: currentText.length === 1 ? '25px' : '16px',
-			}} >
-			{currentText}
-		</text>
-		{
-			bump
-				? <line x1="-6" x2="6" y1="16" y2="16"/>
-				: null
-		}
+function Key({x, y, height, width, rotation, text, isPressed, bump, layerName, layerSwitching, currentLayer}) {
+	return <g
+		className={classNames('key', {"is-pressed": isPressed}, layerSwitching ?? layerName)}
+		transform={getKeyTransform(x, y, height, width, rotation)}>
+		<g>
+			<rect class="category-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>
+			<rect class="click-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>
+			<text 
+				textAnchor="middle" 
+				dominantBaseline="central"
+				style={{
+					fontSize: text.length === 1 ? '25px' : '16px',
+				}} >
+				{text}
+			</text>
+			{
+				bump
+					? <line class="bump" x1="-6" x2="6" y1="16" y2="16"/>
+					: null
+			}
+		</g>
 	</g>;
 }
