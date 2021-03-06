@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState } from './store.js'
-import classNames from 'classnames';
+import Legend from './Legend.js';
+import Key from './Key.js';
 
 export default function Keyboard() {
 	return <svg className="keyboard"  viewBox="-400 0 800 400">
 		<KeyboardSide isLeft={true}/>
 		<KeyboardSide isLeft={false}/>
-		{/* <line x1="-1000" x2="1000"/>
-		<line y1="-1000" y2="1000"/> */}
+		<Legend/>
 	</svg>;
 }
 
@@ -192,15 +192,6 @@ export function KeyboardSide({isLeft}) {
 		</g>;
 }
 
-function getKeyTransform(x, y, height, width, rotation) {
-	const translate = ` translate(${x}, ${y})`;
-	const rotate = rotation && `rotate(${rotation}, ${x}, ${y})`;
-
-	return rotate
-		? rotate + translate 
-		: translate;
-}
-
 // move this to actions
 function deduceCurrentText(key, currentLayer) {
 	return {
@@ -214,28 +205,4 @@ function deduceCurrentText(key, currentLayer) {
 					// : key.qwerty
 					: key.default
 	};
-}
-
-function Key({x, y, height, width, rotation, text, isPressed, bump, layerName, layerSwitching, currentLayer}) {
-	return <g
-		className={classNames('key', {"is-pressed": isPressed}, layerSwitching ?? layerName)}
-		transform={getKeyTransform(x, y, height, width, rotation)}>
-		<g>
-			<rect class="category-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>
-			<rect class="click-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>
-			<text 
-				textAnchor="middle" 
-				dominantBaseline="central"
-				style={{
-					fontSize: text.length === 1 ? '25px' : '16px',
-				}} >
-				{text}
-			</text>
-			{
-				bump
-					? <line class="bump" x1="-6" x2="6" y1="16" y2="16"/>
-					: null
-			}
-		</g>
-	</g>;
 }
