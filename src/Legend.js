@@ -9,22 +9,22 @@ export default function Legend() {
 		{text: "Default", name: "default"},
 		{text: "Punctuation", name: "punc"},
 		{text: "Arrows", name: "arr"},
-		{text: "Numbers", name: "numbrs"},
+		{text: "Numbers", name: "num"},
 	];
 
 	const legendKeys = layers.map(({text, name}, i) => ({
 		x: 0,
-		y: i * 50,
+		y: i * 54,
 		height: 39.263,
 		width: 130,
 		text,
-		isPressed: false,
+		isPressed: name === state.currentLayer,
 		layerName: name,
 	}));
 
 	return <g
 		class="legend"
-		transform="translate(-320, 225)">
+		transform="translate(-300, 235)">
 		{
 			legendKeys.map(legendKey =>
 				<Key {...legendKey}/>

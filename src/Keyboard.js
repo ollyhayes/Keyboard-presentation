@@ -4,7 +4,7 @@ import Legend from './Legend.js';
 import Key from './Key.js';
 
 export default function Keyboard() {
-	return <svg className="keyboard"  viewBox="-400 0 800 400">
+	return <svg className="keyboard"  viewBox="-400 0 800 800">
 		<KeyboardSide isLeft={true}/>
 		<KeyboardSide isLeft={false}/>
 		<Legend/>
