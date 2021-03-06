@@ -22,15 +22,23 @@ html,body,svg
   fill: none;
 }
 
+g.key g {
+  transition: transform var(--slow-transition);
+}
+g.key.is-pressed g {
+  transition: none;
+  transform: scale(1.5);
+}
+
 g.key rect.click-indicator {
-  transition: fill-opacity var(--slow-transition), fill var(--fast-transition);
-  fill: grey;
+  transition: fill-opacity var(--slow-transition);
+  fill: black;
   fill-opacity: 0;
 }
 g.key.is-pressed rect.click-indicator {
   transition: none;
-  fill: red;
-  fill-opacity: 1;
+  fill-opacity: 0.6;
+  stroke: black;
 }
 
 g.key text {
@@ -39,11 +47,19 @@ g.key text {
   stroke: none;
   font-family: monospace;
 }
-g.key.is-pressed text {
+g.key.is-pressed text{
   transition: none;
   fill: white;
-  stroke: none;
 }
+
+g.key .bump {
+  transition: stroke var(--slow-transition);
+}
+g.key.is-pressed .bump {
+  transition: none;
+  stroke: white;
+}
+
 g.key rect.category-indicator {
   transition: fill var(--fast-transition);
 }
