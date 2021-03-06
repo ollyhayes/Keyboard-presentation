@@ -43,7 +43,7 @@ const layerDefinitions = {
 			'', '', ''
 		],
 	},
-	arr: {
+	arrows: {
 		left: [
 			'', '', 'home', 'pgd', 'pgu', 'end',
 			'', 'del', '←', '↑', '↓', '→',
@@ -85,7 +85,7 @@ const keyDefinitions = {
 	ralt: { text: 'alt', category: "control" },
 	lmeta: { text: 'meta', category: "control" },
 	rmeta: { text: 'meta', category: "control" },
-	arrows: { text: '←↓↑→', category: "control", layerSwitching: "arr" },
+	arrows: { text: '←↓↑→', category: "control", layerSwitching: "arrows" },
 	enter: { text: '↲', category: "control" },
 	backspace: { text: '↤', category: "control" },
 };

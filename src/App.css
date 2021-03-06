@@ -66,7 +66,7 @@ g.key rect.category-indicator {
 g.key.default,g.key.colemak rect.category-indicator { fill: var(--alpha); }
 g.key.punc rect.category-indicator { fill: var(--punc); }
 g.key.num rect.category-indicator { fill: var(--numbers); }
-g.key.arr rect.category-indicator { fill: var(--control); }
+g.key.arrows rect.category-indicator { fill: var(--control); }
 
 div.legend {
   position: absolute;

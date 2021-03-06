@@ -8,7 +8,7 @@ export default function Legend() {
 	const layers = [
 		{text: "Default", name: "default"},
 		{text: "Punctuation", name: "punc"},
-		{text: "Arrows", name: "arr"},
+		{text: "Arrows", name: "arrows"},
 		{text: "Numbers", name: "num"},
 	];
 

@@ -198,8 +198,8 @@ function deduceCurrentText(key, currentLayer) {
 		...key,
 		...currentLayer === 'punc' && key.punc.text
 			? key.punc
-			: currentLayer === 'arrows' && key.arr.text
-				? key.arr
+			: currentLayer === 'arrows' && key.arrows.text
+				? key.arrows
 				: currentLayer === 'num' && key.num.text
 					? key.num
 					// : key.qwerty
