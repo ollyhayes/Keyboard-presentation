@@ -12,7 +12,7 @@ export default function Legend() {
 		{text: "Numbers", name: "numbrs"},
 	];
 
-	return <div>
+	return <div class="legend">
 		{
 			layers.map(({text, name}) =>
 				<div key={name} class={classNames({'is-selected': name === state.currentLayer})}>

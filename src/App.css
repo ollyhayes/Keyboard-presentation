@@ -67,3 +67,20 @@ g.key.default,g.key.colemak rect.category-indicator { fill: var(--alpha); }
 g.key.punc rect.category-indicator { fill: var(--punc); }
 g.key.num rect.category-indicator { fill: var(--numbers); }
 g.key.arr rect.category-indicator { fill: var(--control); }
+
+div.legend {
+  position: absolute;
+  /* border: 2px solid black; */
+  top: 450px;
+  left: 50px;
+  font-size: 30px;
+  font-family: monospace;
+  text-align: center;
+}
+
+div.legend div {
+  border: 2px solid black;
+  padding: 10px 50px;
+  margin: 15px 0;
+
+}
