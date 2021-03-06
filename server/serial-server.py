@@ -28,27 +28,31 @@ async def send_codes():
 				sockets.remove(socket)
 
 def receive_keycodes():
-	port = "ttyACM0"
-	with io.FileIO(
-		os.open(f"/dev/{port}", os.O_NOCTTY | os.O_RDWR),
-		"r+") as file:
-		print(f"listening on {port}")
+	try:
+		port = "ttyACM0"
+		with io.FileIO(
+			os.open(f"/dev/{port}", os.O_NOCTTY | os.O_RDWR),
+			"r+") as file:
+			print(f"listening on {port}")
 
-		tty.setcbreak(file.fileno())
+			tty.setcbreak(file.fileno())
 
-		while True:
-			code = str(int.from_bytes(file.read(1), "big"))
-			# if code == "52":
-			if code == "0":
-				print("null character found, exiting!")
+			while True:
+				code = str(int.from_bytes(file.read(1), "big"))
+				# if code == "52":
+				if code == "0":
+					raise Exception("null character found, exiting!")
 
-				# write a change to the file system to trigger nodemon to restart the process
-				with open("server/trigger.json", "a") as trigger_file:
-					trigger_file.write("nothing")
+					sys.exit()
 
-				sys.exit()
+				loop.call_soon_threadsafe(queue.put_nowait, code)
+	except Exception as e:
+		print("Caught exception:")
+		print(e)
 
-			loop.call_soon_threadsafe(queue.put_nowait, code)
+		# write a change to the file system to trigger nodemon to restart the process
+		with open("server/trigger.json", "a") as trigger_file:
+			trigger_file.write("nothing")
 
 receive_thread = Thread(target=receive_keycodes)
 receive_thread.start()
