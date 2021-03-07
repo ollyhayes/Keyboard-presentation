@@ -10,6 +10,7 @@ export default function Legend() {
 		{text: "Symbols", name: "punc"},
 		{text: "Navigation", name: "arrows"},
 		{text: "Numbers", name: "num"},
+		{text: "Functions", name: "functions"},
 	];
 
 	const legendKeys = layers.map(({text, name}, i) => ({
