@@ -2,7 +2,7 @@ const electron = require('electron');
 const { app, BrowserWindow } = electron;
 
 app.on('ready', () => {
-	const {bounds} = electron.screen.getAllDisplays()[0];
+	const {bounds} = electron.screen.getAllDisplays()[3];
 
 	const window = new BrowserWindow({
 		x: bounds.x + bounds.width - 600,
@@ -13,12 +13,7 @@ app.on('ready', () => {
 		frame: false,
 		alwaysOnTop: true,
 		skipTaskbar: true,
-		focusable: false,
-		// transparent: true
-
-		// webPreferences: {
-		// 	nodeIntegration: true
-		// }
+		focusable: false
 	});
 
 	window.loadURL('http://localhost:3001/');
