@@ -18,21 +18,31 @@ function updateKey(keys, index, isPressed) {
 			: key)
 }
 
+const puncKeyIndex = 19;
+const arrowsKeyIndex = 20;
+const tabKeyIndex = 0;
+const qKeyIndex = 1;
+
 function updateLayers(state, isLeft, index, isPressed) {
-	if (index === 19 && (state.currentLayer === 'colemak' || state.currentLayer === 'punc'))
+	if (index === puncKeyIndex && (state.currentLayer === 'colemak' || state.currentLayer === 'punc'))
 		return {
 			...state,
 				currentLayer: isPressed ? 'punc' : 'colemak'
 		};
-	else if (index === 20 && isLeft === true && (state.currentLayer === 'colemak' || state.currentLayer === 'arrows'))
+	else if (index === arrowsKeyIndex && isLeft === true && (state.currentLayer === 'colemak' || state.currentLayer === 'arrows'))
 		return {
 			...state,
 				currentLayer: isPressed ? 'arrows' : 'colemak'
 		};
-	else if (index === 0 && isLeft === true && (state.currentLayer === 'colemak' || state.currentLayer === 'num'))
+	else if (index === tabKeyIndex && isLeft === true && (state.currentLayer === 'colemak' || state.currentLayer === 'num' || state.currentLayer === 'functions'))
 		return {
 			...state,
 				currentLayer: isPressed ? 'num' : 'colemak'
+		};
+	else if (index === qKeyIndex && isLeft === true && (state.currentLayer === 'num' || state.currentLayer === 'functions'))
+		return {
+			...state,
+				currentLayer: isPressed ? 'functions' : 'num'
 		};
 	else
 		return state;

@@ -203,6 +203,8 @@ function deduceCurrentText(key, currentLayer) {
 				: currentLayer === 'num' && key.num.text
 					? key.num
 					// : key.qwerty
-					: key.default
+					: currentLayer === 'functions' && key.functions.text
+						? key.functions
+						: key.default
 	};
 }

@@ -6,6 +6,7 @@
   --numbers: #baffb4;
   --control: #b5b4ff;
   --punc: #ffb5ff;
+  --functions: #ffbab5;
 }
 
 html,body,svg
@@ -67,6 +68,7 @@ g.key.default,g.key.colemak rect.category-indicator { fill: var(--alpha); }
 g.key.punc rect.category-indicator { fill: var(--punc); }
 g.key.num rect.category-indicator { fill: var(--numbers); }
 g.key.arrows rect.category-indicator { fill: var(--control); }
+g.key.functions rect.category-indicator { fill: var(--functions); }
 
 div.legend {
   position: absolute;
