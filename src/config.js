@@ -59,7 +59,7 @@ const layerDefinitions = {
 	},
 	num: {
 		left: [
-			'', 'FX', '7', '8', '9', '',
+			'', 'Fx', '7', '8', '9', '',
 			'', '', '4', '5', '6', '',
 			'', '', '1', '2', '3', '',
 			'', '', ''
@@ -73,7 +73,7 @@ const layerDefinitions = {
 	},
 	functions: {
 		left: [
-			'', 'FX', 'F7', 'F8', 'F9', 'F12',
+			'', 'Fx', 'F7', 'F8', 'F9', 'F12',
 			'', '', 'F4', 'F5', 'F6', 'F11',
 			'', '', 'F1', 'F2', 'F3', 'F10',
 			'', '', ''
@@ -125,7 +125,7 @@ const keyDefinitions = {
 	arrows: { text: '←↓↑→', layerSwitching: "arrows" },
 	enter: { text: '↲' },
 	backspace: { text: '↤' },
-	"FX": { layerSwitching: "functions" }
+	Fx: { layerSwitching: "functions" }
 };
 
 const mapIndexed = addIndex(map);
