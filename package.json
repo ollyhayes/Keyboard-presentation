@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:server": "nodemon --exec python server/serial-server.py",
+    "start:server": "nodemon --delay 10 --exec python server/serial-server.py",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
