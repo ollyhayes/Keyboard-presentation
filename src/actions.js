@@ -1,14 +1,20 @@
 
 export function updateKeyState(store, isLeft, index, isPressed) {
-	store.updateValue(state => ({
-		...state,
-		...updateLayers(state, isLeft, index, isPressed),
-		keys: {
-			...state.keys,
-			left: isLeft ? updateKey(state.keys.left, index, isPressed) : state.keys.left,
-			right: !isLeft ? updateKey(state.keys.right, index, isPressed) : state.keys.right,
-		}
-	}))
+	store.updateValue(state => {
+		const stateWithPresses = {
+			...state,
+			keys: {
+				...state.keys,
+				left: isLeft ? updateKey(state.keys.left, index, isPressed) : state.keys.left,
+				right: !isLeft ? updateKey(state.keys.right, index, isPressed) : state.keys.right,
+			}
+		};
+
+		return {
+			...state,
+			...updateLayers(stateWithPresses, isLeft, index, isPressed),
+		};
+	})
 }
 
 function updateKey(keys, index, isPressed) {
@@ -23,11 +29,26 @@ const arrowsKeyIndex = 20;
 const tabKeyIndex = 0;
 const qKeyIndex = 1;
 
+export function isPuncPressed(state, isLeft) {
+	const leftPressed = state.keys.left[puncKeyIndex].isPressed;
+	const rightPressed = state.keys.right[puncKeyIndex].isPressed;
+
+	return isLeft
+		? leftPressed
+		: isLeft === false
+			? rightPressed
+			: leftPressed || rightPressed;
+}
+
 function updateLayers(state, isLeft, index, isPressed) {
 	if (index === puncKeyIndex && (state.currentLayer === 'colemak' || state.currentLayer === 'punc'))
 		return {
 			...state,
-				currentLayer: isPressed ? 'punc' : 'colemak'
+				currentLayer: isPressed
+					? 'punc'
+					: isPuncPressed(state)
+						? 'punc'
+						: 'colemak'
 		};
 	else if (index === arrowsKeyIndex && isLeft === true && (state.currentLayer === 'colemak' || state.currentLayer === 'arrows'))
 		return {

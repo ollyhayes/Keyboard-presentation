@@ -1,4 +1,4 @@
-import { map, toPairs, pipe, values, mergeAll, reduce, mapObjIndexed, zip, zipWith, addIndex, mergeRight } from "ramda";
+import { map, pipe, values, reduce, mapObjIndexed, zipWith, addIndex, mergeRight } from "ramda";
 
 const layerDefinitions = {
 	default: {
@@ -128,8 +128,6 @@ const applyToKeys = (keys, layerName) => mapIndexed((key, index) => ({
 		}
 }))(keys);
 
-const logAll = map(a => console.log('logging: ', a));
-
 const process = pipe(
 	mapObjIndexed((layer, name) => ({
 		...layer,
@@ -150,7 +148,7 @@ const process = pipe(
 
 const keyboard = process(layerDefinitions);
 
-console.log(keyboard);
+console.log('Keyboard: ', keyboard);
 
 const config = {
 	keys: keyboard,
