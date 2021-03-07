@@ -1,4 +1,5 @@
 import { map, pipe, values, reduce, mapObjIndexed, zipWith, addIndex, mergeRight } from "ramda";
+import { isPuncPressed } from "./actions";
 
 const layerDefinitions = {
 	default: {
@@ -86,6 +87,12 @@ const layerDefinitions = {
 		],
 	}
 };
+
+// function getPuncText(isLeft) {
+// 	return state => isPuncPressed(state, isLeft)
+// 		? "!?$"
+// 		: "äß";
+// }
 
 const keyDefinitions = {
 	tab: { text: '↹', category: "numbers", layerSwitching: "num"},

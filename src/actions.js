@@ -5,22 +5,37 @@ export function updateKeyState(store, isLeft, index, isPressed) {
 			...state,
 			keys: {
 				...state.keys,
-				left: isLeft ? updateKey(state.keys.left, index, isPressed) : state.keys.left,
-				right: !isLeft ? updateKey(state.keys.right, index, isPressed) : state.keys.right,
+				left: isLeft ? updateKey(state.keys.left, index, key => ({...key, isPressed})) : state.keys.left,
+				right: !isLeft ? updateKey(state.keys.right, index, key => ({...key, isPressed})) : state.keys.right,
 			}
 		};
 
+		// if punc pressed and still says punc, change the other key to äß (if it doesn't say punc then do nothing)
+		// if punc released and the other key is also not pressed, change both keys to punc
+
+		const leftPunc = state.keys.left[puncKeyIndex];
+		const rightPunc = state.keys.right[puncKeyIndex];
+		const stateWithUpdatedPuncKeys = index === puncKeyIndex && isPressed && !rightPunc.isPressed
+			? {
+				...stateWithPresses,
+				keys: {
+					...stateWithPresses.keys,
+					right: updateKey(state.keys.right, puncKeyIndex, key => ({...key, punc: {...key.punc, text: 'äß'}}))
+				}
+			}
+			: stateWithPresses;
+
 		return {
-			...state,
-			...updateLayers(stateWithPresses, isLeft, index, isPressed),
+			...stateWithUpdatedPuncKeys,
+			...updateLayers(stateWithUpdatedPuncKeys, isLeft, index, isPressed),
 		};
 	})
 }
 
-function updateKey(keys, index, isPressed) {
+function updateKey(keys, index, update) {
 	return keys.map((key, keyIndex) =>
 		index === keyIndex
-			? {...key, isPressed }
+			? update(key)
 			: key)
 }
 
