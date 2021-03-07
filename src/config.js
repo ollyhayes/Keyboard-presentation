@@ -45,13 +45,13 @@ const layerDefinitions = {
 	},
 	arrows: {
 		left: [
-			'', '', 'home', 'pgd', 'pgu', 'end',
-			'', 'del', '←', '↑', '↓', '→',
+			'', '', 'home', 'pgu', 'pgd', 'end',
+			'enter', 'del', '←', '↑', '↓', '→',
 			'', 'ins', 'c←', 'lmeta', 'lalt', 'c→',
 			'', 'F12', ''
 		],
 		right: [
-			'', '', 'home', 'pgd', 'pgu', 'end',
+			'', '', 'end', 'pgu', 'pgd', 'home',
 			'', 'del', '→', '↑', '↓', '←',
 			'', 'ins', 'c→', '↑↑↑↑', '↓↓↓↓', 'c←',
 			'', 'F12', ''
