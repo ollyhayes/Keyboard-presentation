@@ -73,14 +73,20 @@ export function isPuncPressed(state, isLeft) {
 }
 
 function updateLayers(state, isLeft, index, isPressed) {
-	if (index === puncKeyIndex && (state.currentLayer === 'colemak' || state.currentLayer === 'punc'))
+	if (index === puncKeyIndex && (state.currentLayer === 'colemak' || state.currentLayer === 'punc' || state.currentLayer === 'specials'))
 		return {
 			...state,
-				currentLayer: isPressed
-					? 'punc'
-					: isPuncPressed(state)
+				currentLayer: isPressed && isPuncPressed(state, !isLeft)
+					? 'specials'
+					: isPressed && !isPuncPressed(state, !isLeft)
 						? 'punc'
-						: 'colemak'
+						: !isPressed && isPuncPressed(state, !isLeft)
+							? 'punc'
+							: 'colemak'
+					// ? 'punc'
+					// : isPuncPressed(state)
+					// 	? 'punc'
+					// 	: 'colemak'
 		};
 	else if (index === arrowsKeyIndex && isLeft === true && (state.currentLayer === 'colemak' || state.currentLayer === 'arrows'))
 		return {

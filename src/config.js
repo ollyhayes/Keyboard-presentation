@@ -1,5 +1,4 @@
 import { map, pipe, values, reduce, mapObjIndexed, zipWith, addIndex, mergeRight } from "ramda";
-import { isPuncPressed } from "./actions";
 
 const layerDefinitions = {
 	default: {
