@@ -59,7 +59,7 @@ const layerDefinitions = {
 	},
 	num: {
 		left: [
-			'', '', '7', '8', '9', '',
+			'', 'FX', '7', '8', '9', '',
 			'', '', '4', '5', '6', '',
 			'', '', '1', '2', '3', '',
 			'', '', ''
@@ -73,7 +73,7 @@ const layerDefinitions = {
 	},
 	functions: {
 		left: [
-			'', '', 'F7', 'F8', 'F9', 'F12',
+			'', 'FX', 'F7', 'F8', 'F9', 'F12',
 			'', '', 'F4', 'F5', 'F6', 'F11',
 			'', '', 'F1', 'F2', 'F3', 'F10',
 			'', '', ''
@@ -102,6 +102,7 @@ const keyDefinitions = {
 	arrows: { text: '←↓↑→', category: "control", layerSwitching: "arrows" },
 	enter: { text: '↲', category: "control" },
 	backspace: { text: '↤', category: "control" },
+	"FX": { layerSwitching: "functions" }
 };
 
 function keyToCategory(key) {

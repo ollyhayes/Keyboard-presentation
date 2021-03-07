@@ -202,9 +202,9 @@ function deduceCurrentText(key, currentLayer) {
 				? key.arrows
 				: currentLayer === 'num' && key.num.text
 					? key.num
-					// : key.qwerty
 					: currentLayer === 'functions' && key.functions.text
 						? key.functions
 						: key.default
+						// : key.qwerty
 	};
 }
