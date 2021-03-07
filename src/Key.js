@@ -17,6 +17,7 @@ export default function Key({
 	width,
 	rotation,
 	text,
+	name,
 	isPressed,
 	bump,
 	layerName,
@@ -33,9 +34,9 @@ export default function Key({
 				textAnchor="middle" 
 				dominantBaseline="central"
 				style={{
-					fontSize: text.length === 1 ? '25px' : '16px',
+					fontSize: (text ?? name).length === 1 ? '25px' : '16px',
 				}} >
-				{text}
+				{text ?? name}
 			</text>
 			{
 				bump

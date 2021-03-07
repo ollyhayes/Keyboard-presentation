@@ -196,13 +196,13 @@ export function KeyboardSide({isLeft}) {
 function deduceCurrentText(key, currentLayer) {
 	return {
 		...key,
-		...currentLayer === 'punc' && key.punc.text
+		...currentLayer === 'punc' && key.punc.name
 			? key.punc
-			: currentLayer === 'arrows' && key.arrows.text
+			: currentLayer === 'arrows' && key.arrows.name
 				? key.arrows
-				: currentLayer === 'num' && key.num.text
+				: currentLayer === 'num' && key.num.name
 					? key.num
-					: currentLayer === 'functions' && key.functions.text
+					: currentLayer === 'functions' && key.functions.name
 						? key.functions
 						: key.default
 						// : key.qwerty

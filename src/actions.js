@@ -20,7 +20,7 @@ export function updateKeyState(store, isLeft, index, isPressed) {
 				...stateWithPresses,
 				keys: {
 					...stateWithPresses.keys,
-					right: updateKey(stateWithPresses.keys.right, puncKeyIndex, key => ({...key, punc: {...key.punc, text: 'äß'}}))
+					right: updateKey(stateWithPresses.keys.right, puncKeyIndex, key => ({...key, punc: {...key.punc, name: 'äß'}}))
 				}
 			}
 			: index === puncKeyIndex && !isLeft && isPressed && !leftPunc.isPressed
@@ -28,7 +28,7 @@ export function updateKeyState(store, isLeft, index, isPressed) {
 					...stateWithPresses,
 					keys: {
 						...stateWithPresses.keys,
-						left: updateKey(stateWithPresses.keys.left, puncKeyIndex, key => ({...key, punc: {...key.punc, text: 'äß'}}))
+						left: updateKey(stateWithPresses.keys.left, puncKeyIndex, key => ({...key, punc: {...key.punc, name: 'äß'}}))
 					}
 				}
 				: index === puncKeyIndex && !isPressed && !leftPunc.isPressed && !rightPunc.isPressed
@@ -36,8 +36,8 @@ export function updateKeyState(store, isLeft, index, isPressed) {
 						...stateWithPresses,
 						keys: {
 							...stateWithPresses.keys,
-							left: updateKey(stateWithPresses.keys.left, puncKeyIndex, key => ({...key, punc: {...key.punc, text: '!?$'}})),
-							right: updateKey(stateWithPresses.keys.right, puncKeyIndex, key => ({...key, punc: {...key.punc, text: '!?$'}}))
+							left: updateKey(stateWithPresses.keys.left, puncKeyIndex, key => ({...key, punc: {...key.punc, name: '!?$'}})),
+							right: updateKey(stateWithPresses.keys.right, puncKeyIndex, key => ({...key, punc: {...key.punc, name: '!?$'}}))
 						}
 					}
 					: stateWithPresses;
