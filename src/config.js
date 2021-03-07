@@ -35,13 +35,13 @@ const layerDefinitions = {
 			'a/t', '!', '"', '€', '$', '%',
 			'', '|', '¬', '[', ']', '~',
 			'', '\\', '`', 'lmeta', 'lalt', '#',
-			'', '', ''
+			'', 'lpunc', ''
 		],
 		right: [
 			'', ')', '(', '*', '&', '^',
 			'', '+', '-', '}', '{', '\'',
 			'', '=', '_', 'rmeta', 'ralt', '@',
-			'', '', ''
+			'', 'rpunc', ''
 		],
 	},
 	arrows: {
@@ -94,12 +94,15 @@ const layerDefinitions = {
 // 		: "äß";
 // }
 
+const puncKey = { text: '!?$', layerSwitching: "punc" };
+const specialsKey = { text: 'äßß', layerSwitching: "specials" };
+
 const keyDefinitions = {
 	tab: { text: '↹', layerSwitching: "num"},
 	lshift: { text: '⇑' },
 	rshift: { text: '⇑' },
-	lpunc: { text: '!?$', layerSwitching: "punc" },
-	rpunc: { text: '!?$', layerSwitching: "punc" },
+	lpunc: {...puncKey, puncKey, specialsKey },
+	rpunc: {...puncKey, puncKey, specialsKey },
 	lctrl: { text: 'ctrl' },
 	rctrl: { text: 'ctrl' },
 	lalt: { text: 'alt' },
@@ -120,9 +123,8 @@ const applyToKeys = (keys, layerName) => mapIndexed((key, index) => ({
 		name: key,
 		[layerName]: {
 			name: key,
-			text: keyDefinitions[key]?.text,
-			layerSwitching: keyDefinitions[key]?.layerSwitching,
-			layerName
+			layerName,
+			...keyDefinitions[key]
 		}
 }))(keys);
 
