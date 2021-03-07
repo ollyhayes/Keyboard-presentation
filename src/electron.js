@@ -8,15 +8,16 @@ app.on('ready', () => {
 		x: bounds.x + bounds.width - 600,
 		y: bounds.y + bounds.height - 290,
 		width: 500,
-		height: 190,
+		height: 300,
 		show: true,
-		frame: false,
+		// frame: false,
+		autoHideMenuBar: true,
 		alwaysOnTop: true,
-		skipTaskbar: true,
-		focusable: false
+		// skipTaskbar: true,
+		// focusable: false
 	});
 
 	window.loadURL('http://localhost:3001/');
 });
 
-app.on('window-all-closed', e => e.preventDefault());
+// app.on('window-all-closed', e => e.preventDefault());
