@@ -95,8 +95,8 @@ const layerDefinitions = {
 // }
 
 const puncKey = { text: '!?$', layerSwitching: "punc" };
-const specialsKey = { text: 'äßß', layerSwitching: "specials" };
-
+const specialsKey = { text: 'ä', layerSwitching: "specials" };
+	
 const keyDefinitions = {
 	tab: { text: '↹', layerSwitching: "num"},
 	lshift: { text: '⇑' },
