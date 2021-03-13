@@ -45,13 +45,13 @@ const layerDefinitions = {
 	},
 	arrows: {
 		left: [
-			'', '', 'home', 'pgu', 'pgd', 'end',
+			'', '‽', 'home', 'pgu', 'pgd', 'end',
 			'enter', 'del', '←', '↑', '↓', '→',
 			'', 'ins', 'c←', 'lmeta', 'lalt', 'c→',
 			'', 'F12', ''
 		],
 		right: [
-			'', '', 'end', 'pgu', 'pgd', 'home',
+			'', '‽', 'end', 'pgu', 'pgd', 'home',
 			'', 'del', '→', '↑', '↓', '←',
 			'', 'ins', 'c→', '↑↑↑↑', '↓↓↓↓', 'c←',
 			'', 'F12', ''
@@ -82,7 +82,7 @@ const layerDefinitions = {
 			'', '', 'F9', 'F8', 'F7', 'F12',
 			'', '', 'F6', 'F5', 'F4', 'F11',
 			'', '', 'F3', 'F2', 'F1', 'F10',
-			'.', 'F0', ''
+			'', '', ''
 		],
 	},
 	specials: {
@@ -109,7 +109,7 @@ const layerDefinitions = {
 
 const puncKey = { text: '!?$', layerSwitching: "punc" };
 const specialsKey = { text: 'ä', layerSwitching: "specials" };
-	
+
 const keyDefinitions = {
 	tab: { text: '↹', layerSwitching: "num"},
 	lshift: { text: '⇑' },
