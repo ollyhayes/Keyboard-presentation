@@ -6,17 +6,17 @@ export default function Legend() {
 	const state = useState();
 
 	const layers = [
-		{text: "Default", name: "default"},
-		{text: "Symbols", name: "punc"},
-		{text: "Navigation", name: "arrows"},
-		{text: "Numbers", name: "num"},
-		{text: "Functions", name: "functions"},
-		{text: "Specials", name: "specials"},
+		{text: "Default", name: "default", x: 0, y: 0},
+		{text: "Navigation", name: "arrows", x: 0, y: 1},
+		{text: "Symbols", name: "punc", x: 0, y: 2},
+		{text: "Specials", name: "specials", x: 1, y: 2},
+		{text: "Numbers", name: "num", x: 0, y: 3},
+		{text: "Functions", name: "functions", x: 1, y: 3},
 	];
 
-	const legendKeys = layers.map(({text, name}, i) => ({
-		x: 0,
-		y: i * 54,
+	const legendKeys = layers.map(({text, name, x, y}, i) => ({
+		x: x * 180,
+		y: y * 54,
 		height: 39.263,
 		width: 130,
 		text,
