@@ -11,5 +11,5 @@ tmux split-window -v
 tmux send-keys npm space run space start:server space enter
 
 tmux split-window -h
-sleep 5
+sleep 20
 tmux send-keys npm space run space start:electron space enter
