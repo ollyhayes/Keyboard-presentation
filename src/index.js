@@ -31,7 +31,7 @@ openSocket(keyCode => {
 	keyCode = keyCode >= 21 ? keyCode - 3 : keyCode; // thumb keys are offset by three (because we're using the column to build the index)
 	
 	updateKeyState(store, isLeft, keyCode, isPressed);
-	console.log(Date.now(), isLeft, keyCode, isPressed);
+	// console.log(Date.now(), isLeft, keyCode, isPressed);
 });
 
 // document.addEventListener('keydown', event => handleKey(event, true));

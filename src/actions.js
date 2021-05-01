@@ -77,31 +77,31 @@ function isLayer(state, ...layers) {
 }
 
 function updateLayers(state, isLeft, index, isPressed) {
-	if (index === puncKeyIndex && isLayer(state, 'colemak', 'qwerty', 'puncLeft', 'puncRight', 'specials'))
+	if (index === puncKeyIndex && isLayer(state, 'colemak', 'qwerty', 'puncLeft', 'puncRight', 'specialLeft', 'specialRight'))
 		return {
 			...state,
-				currentLayer: isPressed && isPuncPressed(state, !isLeft)
-					? 'specials'
-					: isPressed && !isPuncPressed(state, !isLeft)
-						? isLeft ? 'puncLeft' : 'puncRight'
-						: !isPressed && isPuncPressed(state, !isLeft)
-							? isLeft ? 'puncRight' : 'puncLeft'
-							: 'colemak'
+			currentLayer: isPressed && isPuncPressed(state, !isLeft)
+				? isLeft ? 'specialLeft' : 'specialRight'
+				: isPressed && !isPuncPressed(state, !isLeft)
+					? isLeft ? 'puncLeft' : 'puncRight'
+					: !isPressed && isPuncPressed(state, !isLeft)
+						? isLeft ? 'puncRight' : 'puncLeft'
+						: 'colemak'
 		};
 	else if (index === arrowsKeyIndex && isLeft === true && isLayer(state, 'colemak', 'arrows'))
 		return {
 			...state,
-				currentLayer: isPressed ? 'arrows' : 'colemak'
+			currentLayer: isPressed ? 'arrows' : 'colemak'
 		};
 	else if (index === tabKeyIndex && isLeft === true && isLayer(state, 'colemak', 'num', 'functions'))
 		return {
 			...state,
-				currentLayer: isPressed ? 'num' : 'colemak'
+			currentLayer: isPressed ? 'num' : 'colemak'
 		};
 	else if (index === qKeyIndex && isLeft === true && isLayer(state, 'num', 'functions'))
 		return {
 			...state,
-				currentLayer: isPressed ? 'functions' : 'num'
+			currentLayer: isPressed ? 'functions' : 'num'
 		};
 	else
 		return state;

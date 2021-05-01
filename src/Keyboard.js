@@ -206,9 +206,11 @@ function deduceCurrentText(key, currentLayer) {
 						? key.num
 						: currentLayer === 'functions' && key.functions.name
 							? key.functions
-							: currentLayer === 'specials' && key.specials.name
-								? key.specials
-								: key.default
-								// : key.qwerty
+							: currentLayer === 'specialLeft' && key.specialLeft.name
+								? key.specialLeft
+								: currentLayer === 'specialRight' && key.specialRight.name
+									? key.specialRight
+									: key.default
+									// : key.qwerty
 	};
 }

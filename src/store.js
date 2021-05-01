@@ -41,7 +41,7 @@ export function createStore(initialState) {
 		updateValue(update) {
 			value = update(value)
 
-			// console.log('Updated value: ', value)
+			console.log('Updated value: ', value)
 
 			subscriptions.forEach(subscription =>
 				subscription(value))
