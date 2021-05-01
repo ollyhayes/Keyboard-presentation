@@ -206,7 +206,7 @@ function deduceCurrentText(key, currentLayer) {
 						? key.functions
 						: currentLayer === 'specials' && key.specials.name
 							? key.specials
-							: key.default
-							// : key.qwerty
+							// : key.default
+							: key.qwerty
 	};
 }
