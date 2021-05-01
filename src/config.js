@@ -29,12 +29,26 @@ const layerDefinitions = {
 			'rctrl', 'rpunc', 'space'
 		],
 	},
-	punc: {
+	puncLeft: {
 		left: [
 			'a/t', '!', '"', '€', '$', '%',
 			'', '|', '¬', '[', ']', '~',
 			'', '\\', '`', 'lmeta', 'lalt', '#',
 			'', '', ''
+		],
+		right: [
+			'', ')', '(', '*', '&', '^',
+			'', '+', '-', '}', '{', '\'',
+			'', '=', '_', 'rmeta', 'ralt', '@',
+			'', 'ß', ''
+		],
+	},
+	puncRight: {
+		left: [
+			'a/t', '!', '"', '€', '$', '%',
+			'', '|', '¬', '[', ']', '~',
+			'', '\\', '`', 'lmeta', 'lalt', '#',
+			'', 'ß', ''
 		],
 		right: [
 			'', ')', '(', '*', '&', '^',
@@ -125,7 +139,8 @@ const keyDefinitions = {
 	arrows: { text: '←↓↑→', layerSwitching: "arrows" },
 	enter: { text: '↲' },
 	backspace: { text: '↤' },
-	Fx: { layerSwitching: "functions" }
+	Fx: { layerSwitching: "functions" },
+	ß: { layerSwitching: 'specials' }
 };
 
 const mapIndexed = addIndex(map);

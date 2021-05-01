@@ -83,14 +83,10 @@ function updateLayers(state, isLeft, index, isPressed) {
 				currentLayer: isPressed && isPuncPressed(state, !isLeft)
 					? 'specials'
 					: isPressed && !isPuncPressed(state, !isLeft)
-						? 'punc'
+						? isLeft ? 'puncLeft' : 'puncRight'
 						: !isPressed && isPuncPressed(state, !isLeft)
-							? 'punc'
+							? isLeft ? 'puncRight' : 'puncLeft'
 							: 'colemak'
-					// ? 'punc'
-					// : isPuncPressed(state)
-					// 	? 'punc'
-					// 	: 'colemak'
 		};
 	else if (index === arrowsKeyIndex && isLeft === true && isLayer(state, 'colemak', 'arrows'))
 		return {
