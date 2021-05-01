@@ -1,4 +1,4 @@
-import { map, pipe, values, reduce, mapObjIndexed, zipWith, addIndex, mergeRight } from "ramda";
+import { map, pipe, values, reduce, mapObjIndexed, zipWith, addIndex, mergeRight } from 'ramda';
 
 const layerDefinitions = {
 	colemak: {
@@ -130,13 +130,13 @@ const layerDefinitions = {
 };
 
 const keyDefinitions = {
-	tab: { text: '↹', layerSwitching: "num"},
+	tab: { text: '↹', layerSwitching: 'num'},
 	shift: { text: '⇑' },
-	punc: { text: '!?$', layerSwitching: "punc" },
-	arrows: { text: '←↓↑→', layerSwitching: "arrows" },
+	punc: { text: '!?$', layerSwitching: 'punc' },
+	arrows: { text: '←↓↑→', layerSwitching: 'arrows' },
 	enter: { text: '↲' },
 	backspace: { text: '↤' },
-	Fx: { layerSwitching: "functions" },
+	Fx: { layerSwitching: 'functions' },
 	ß: { layerSwitching: 'specials' }
 };
 
@@ -144,13 +144,13 @@ const mapIndexed = addIndex(map);
 
 //bad name, applying what? pass definitions to make pure
 const applyToKeys = (keys, layerName) => mapIndexed((key, index) => ({
-		index,
+	index,
+	name: key,
+	[layerName]: {
 		name: key,
-		[layerName]: {
-			name: key,
-			layerName,
-			...keyDefinitions[key]
-		}
+		layerName,
+		...keyDefinitions[key]
+	}
 }))(keys);
 
 const process = pipe(

@@ -1,50 +1,50 @@
-import React, {useReducer, useContext, useEffect} from 'react'
+import React, {useReducer, useContext, useEffect} from 'react';
 
-const StoreContext = React.createContext()
+const StoreContext = React.createContext();
 
 export function Provider({children, store}) {
 	return <StoreContext.Provider value={store}>
 		{children}
-	</StoreContext.Provider>
+	</StoreContext.Provider>;
 }
 
 export function useState() {
-	const [, forceRender] = useReducer(s => s + 1, 0)
-	const store = useContext(StoreContext)
+	const [, forceRender] = useReducer(s => s + 1, 0);
+	const store = useContext(StoreContext);
 
 	useEffect(() => {
-		const subscription = store.subscribe(() => forceRender())
-		return () => store.unsubscribe(subscription)
-	}, [store])
+		const subscription = store.subscribe(() => forceRender());
+		return () => store.unsubscribe(subscription);
+	}, [store]);
 
-	return store.getValue()
+	return store.getValue();
 }
 
 export function useStore() {
-	return useContext(StoreContext)
+	return useContext(StoreContext);
 }
 
 export function createStore(initialState) {
-	const subscriptions = new Set()
-	let value = initialState
+	const subscriptions = new Set();
+	let value = initialState;
 	return {
 		subscribe(callback) {
-			subscriptions.add(callback)
-			return callback
+			subscriptions.add(callback);
+			return callback;
 		},
 		unsubscribe(callback) {
-			subscriptions.delete(callback)
+			subscriptions.delete(callback);
 		},
 		getValue() {
-			return value
+			return value;
 		},
 		updateValue(update) {
-			value = update(value)
+			value = update(value);
 
-			console.log('Updated value: ', value)
+			console.log('Updated value: ', value);
 
 			subscriptions.forEach(subscription =>
-				subscription(value))
+				subscription(value));
 		}
-	}
+	};
 }

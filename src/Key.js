@@ -25,7 +25,7 @@ export default function Key({
 	currentLayer,
 }) {
 	return <g
-		className={classNames('key', {"is-pressed": isPressed}, layerSwitching ?? layerName)}
+		className={classNames('key', {'is-pressed': isPressed}, layerSwitching ?? layerName)}
 		transform={getKeyTransform(x, y, height, width, rotation)}>
 		<g>
 			<rect className="category-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>

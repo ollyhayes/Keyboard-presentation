@@ -1,4 +1,3 @@
-
 export function updateKeyState(store, isLeft, index, isPressed) {
 	store.updateValue(state => {
 		const stateWithPresses = {
@@ -14,14 +13,14 @@ export function updateKeyState(store, isLeft, index, isPressed) {
 			...stateWithPresses,
 			...updateLayers(stateWithPresses, isLeft, index, isPressed),
 		};
-	})
+	});
 }
 
 function updateKey(keys, index, update) {
 	return keys.map((key, keyIndex) =>
 		index === keyIndex
 			? update(key)
-			: key)
+			: key);
 }
 
 const puncKeyIndex = 19;
@@ -48,7 +47,7 @@ function isKeyPressed(state, keyIndex, isLeft) {
 }
 
 function isLayer(state, ...layers) {
-	return layers.includes(state.currentLayer)
+	return layers.includes(state.currentLayer);
 }
 
 function updateLayers(state, isLeft, index, isPressed) {

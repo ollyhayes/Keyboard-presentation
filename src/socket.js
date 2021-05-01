@@ -2,7 +2,7 @@ import ReconnectingWebSocket from 'reconnecting-websocket';
 
 export default function openSocket(handleData) {
 	// const socket = new WebSocket(`ws://${window.location.host}`);
-	const socket = new ReconnectingWebSocket(`ws://localhost:8765`);
+	const socket = new ReconnectingWebSocket('ws://localhost:8765');
 
 	socket.onopen = function () {
 		console.log('socket connected');

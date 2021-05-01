@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { Provider, createStore } from './store.js'
+import { Provider, createStore } from './store.js';
 import config from './config';
 import openSocket from './socket';
 import { updateKeyState } from './actions';
@@ -14,7 +14,7 @@ ReactDOM.render(
 		<App/>
 	</Provider>,
 	document.getElementById('root')
-)
+);
 
 const initialOffset = 40;
 const releaseOffset = 50;
