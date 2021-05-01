@@ -194,27 +194,18 @@ export function KeyboardSide({isLeft}) {
 
 // move this to actions
 function deduceCurrentText(key, currentLayer, baseLayer) {
-	// const layeredAction = key[currentLayer] || key[baseLayer];
-	// return {
-	// 	...key,
-	// 	layeredAction
-	// };
+	const layeredAction = key[currentLayer];
+	
+	if (layeredAction?.name)
+		return {
+			...key,
+			...layeredAction
+		};
+
+	const baseAction = key[baseLayer];
+
 	return {
 		...key,
-		...currentLayer === 'puncLeft' && key.puncLeft.name
-			? key.puncLeft
-			: currentLayer === 'puncRight' && key.puncRight.name
-				? key.puncRight
-				: currentLayer === 'arrows' && key.arrows.name
-					? key.arrows
-					: currentLayer === 'num' && key.num.name
-						? key.num
-						: currentLayer === 'functions' && key.functions.name
-							? key.functions
-							: currentLayer === 'specialLeft' && key.specialLeft.name
-								? key.specialLeft
-								: currentLayer === 'specialRight' && key.specialRight.name
-									? key.specialRight
-									: key[baseLayer]
+		...baseAction
 	};
 }
