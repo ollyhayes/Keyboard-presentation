@@ -173,8 +173,6 @@ const process = pipe(
 
 const keyboard = process(layerDefinitions);
 
-console.log('Keyboard: ', keyboard);
-
 const config = {
 	keys: keyboard,
 	currentLayer: 'colemak',

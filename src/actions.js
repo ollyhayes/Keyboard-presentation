@@ -28,10 +28,17 @@ const puncKeyIndex = 19;
 const arrowsKeyIndex = 20;
 const tabKeyIndex = 0;
 const qKeyIndex = 1;
+const aKeyIndex = 7;
+const shiftKeyIndex = 12;
+const escKeyIndex = 6;
 
 export function isPuncPressed(state, isLeft) {
-	const leftPressed = state.keys.left[puncKeyIndex].isPressed;
-	const rightPressed = state.keys.right[puncKeyIndex].isPressed;
+	return isKeyPressed(state, puncKeyIndex, isLeft);
+}
+
+function isKeyPressed(state, keyIndex, isLeft) {
+	const leftPressed = state.keys.left[keyIndex].isPressed;
+	const rightPressed = state.keys.right[keyIndex].isPressed;
 
 	return isLeft
 		? leftPressed
@@ -56,21 +63,28 @@ function updateLayers(state, isLeft, index, isPressed) {
 						? isLeft ? 'puncRight' : 'puncLeft'
 						: 'colemak'
 		};
-	else if (index === arrowsKeyIndex && isLeft === true && isLayer(state, 'colemak', 'arrows'))
+	else if (index === arrowsKeyIndex && isLeft && isLayer(state, 'colemak', 'arrows'))
 		return {
 			...state,
 			currentLayer: isPressed ? 'arrows' : 'colemak'
 		};
-	else if (index === tabKeyIndex && isLeft === true && isLayer(state, 'colemak', 'num', 'functions'))
+	else if (index === tabKeyIndex && isLeft && isLayer(state, 'colemak', 'num', 'functions'))
 		return {
 			...state,
 			currentLayer: isPressed ? 'num' : 'colemak'
 		};
-	else if (index === qKeyIndex && isLeft === true && isLayer(state, 'num', 'functions'))
+	else if (index === qKeyIndex && isLeft && isLayer(state, 'num', 'functions'))
 		return {
 			...state,
 			currentLayer: isPressed ? 'functions' : 'num'
 		};
+	else if (isLeft && [tabKeyIndex, aKeyIndex].every(i => isKeyPressed(state, i, true))) {
+		return index === escKeyIndex
+			? { ...state, baseLayer: 'qwerty' }
+			: index === shiftKeyIndex
+				? { ...state, baseLayer: 'colemak' }
+				: state;
+	}
 	else
 		return state;
 }
