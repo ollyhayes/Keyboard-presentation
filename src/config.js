@@ -129,19 +129,10 @@ const layerDefinitions = {
 	},
 };
 
-// function getPuncText(isLeft) {
-// 	return state => isPuncPressed(state, isLeft)
-// 		? "!?$"
-// 		: "äß";
-// }
-
-const puncKey = { text: '!?$', layerSwitching: "punc" };
-const specialsKey = { text: 'ä', layerSwitching: "specials" };
-
 const keyDefinitions = {
 	tab: { text: '↹', layerSwitching: "num"},
 	shift: { text: '⇑' },
-	punc: {...puncKey, puncKey, specialsKey },
+	punc: { text: '!?$', layerSwitching: "punc" },
 	arrows: { text: '←↓↑→', layerSwitching: "arrows" },
 	enter: { text: '↲' },
 	backspace: { text: '↤' },
