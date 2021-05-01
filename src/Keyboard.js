@@ -194,6 +194,11 @@ export function KeyboardSide({isLeft}) {
 
 // move this to actions
 function deduceCurrentText(key, currentLayer, baseLayer) {
+	// const layeredAction = key[currentLayer] || key[baseLayer];
+	// return {
+	// 	...key,
+	// 	layeredAction
+	// };
 	return {
 		...key,
 		...currentLayer === 'puncLeft' && key.puncLeft.name

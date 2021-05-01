@@ -136,7 +136,7 @@ const keyDefinitions = {
 	arrows: { text: '←↓↑→', layerSwitching: 'arrows' },
 	enter: { text: '↲' },
 	backspace: { text: '↤' },
-	Fx: { layerSwitching: 'functions' },
+	Fn: { layerSwitching: 'functions' },
 	ß: { layerSwitching: 'specials' }
 };
 
@@ -175,7 +175,7 @@ const keyboard = process(layerDefinitions);
 
 const config = {
 	keys: keyboard,
-	currentLayer: 'colemak',
+	currentLayer: 'default',
 	baseLayer: 'colemak'
 };
 

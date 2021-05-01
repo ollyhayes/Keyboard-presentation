@@ -6,7 +6,7 @@ export default function Legend() {
 	const state = useState();
 
 	const layers = [
-		{text: state.baseLayer === 'colemak' ? 'Colemak' : 'Qwerty', names: ['default'], x: 0, y: 0},
+		{text: state.baseLayer === 'colemak' ? 'Colemak' : 'Qwerty', names: ['base'], x: 0, y: 0},
 		{text: 'Navigation', names: ['arrows'], x: 0, y: 1},
 		{text: 'Symbols', names: ['puncLeft', 'puncRight'], x: 0, y: 2},
 		{text: 'Specials', names: ['specialLeft', 'specialRight'], x: 1, y: 2},
