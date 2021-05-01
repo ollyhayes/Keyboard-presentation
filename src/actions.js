@@ -13,38 +13,38 @@ export function updateKeyState(store, isLeft, index, isPressed) {
 		// if punc pressed and still says punc, change the other key to äß (if it doesn't say punc then do nothing)
 		// if punc released and the other key is also not pressed, change both keys to punc
 
-		const leftPunc = stateWithPresses.keys.left[puncKeyIndex];
-		const rightPunc = stateWithPresses.keys.right[puncKeyIndex];
-		const stateWithUpdatedPuncKeys = index === puncKeyIndex && isLeft && isPressed && !rightPunc.isPressed
-			? {
-				...stateWithPresses,
-				keys: {
-					...stateWithPresses.keys,
-					right: updateKey(stateWithPresses.keys.right, puncKeyIndex, key => ({...key, default: {...key.default, ...key.default.specialsKey }}))
-				}
-			}
-			: index === puncKeyIndex && !isLeft && isPressed && !leftPunc.isPressed
-				? {
-					...stateWithPresses,
-					keys: {
-						...stateWithPresses.keys,
-						left: updateKey(stateWithPresses.keys.left, puncKeyIndex, key => ({...key, default: {...key.default, ...key.default.specialsKey}}))
-					}
-				}
-				: index === puncKeyIndex && !isPressed && !leftPunc.isPressed && !rightPunc.isPressed
-					? {
-						...stateWithPresses,
-						keys: {
-							...stateWithPresses.keys,
-							left: updateKey(stateWithPresses.keys.left, puncKeyIndex, key => ({...key, default: {...key.default, ...key.default.puncKey}})),
-							right: updateKey(stateWithPresses.keys.right, puncKeyIndex, key => ({...key, default: {...key.default, ...key.default.puncKey}}))
-						}
-					}
-					: stateWithPresses;
+		// const leftPunc = stateWithPresses.keys.left[puncKeyIndex];
+		// const rightPunc = stateWithPresses.keys.right[puncKeyIndex];
+		// const stateWithUpdatedPuncKeys = index === puncKeyIndex && isLeft && isPressed && !rightPunc.isPressed
+		// 	? {
+		// 		...stateWithPresses,
+		// 		keys: {
+		// 			...stateWithPresses.keys,
+		// 			right: updateKey(stateWithPresses.keys.right, puncKeyIndex, key => ({...key, default: {...key.default, ...key.default.specialsKey }}))
+		// 		}
+		// 	}
+		// 	: index === puncKeyIndex && !isLeft && isPressed && !leftPunc.isPressed
+		// 		? {
+		// 			...stateWithPresses,
+		// 			keys: {
+		// 				...stateWithPresses.keys,
+		// 				left: updateKey(stateWithPresses.keys.left, puncKeyIndex, key => ({...key, default: {...key.default, ...key.default.specialsKey}}))
+		// 			}
+		// 		}
+		// 		: index === puncKeyIndex && !isPressed && !leftPunc.isPressed && !rightPunc.isPressed
+		// 			? {
+		// 				...stateWithPresses,
+		// 				keys: {
+		// 					...stateWithPresses.keys,
+		// 					left: updateKey(stateWithPresses.keys.left, puncKeyIndex, key => ({...key, default: {...key.default, ...key.default.puncKey}})),
+		// 					right: updateKey(stateWithPresses.keys.right, puncKeyIndex, key => ({...key, default: {...key.default, ...key.default.puncKey}}))
+		// 				}
+		// 			}
+		// 			: stateWithPresses;
 
 		return {
-			...stateWithUpdatedPuncKeys,
-			...updateLayers(stateWithUpdatedPuncKeys, isLeft, index, isPressed),
+			...stateWithPresses,
+			...updateLayers(stateWithPresses, isLeft, index, isPressed),
 		};
 	})
 }
@@ -72,8 +72,12 @@ export function isPuncPressed(state, isLeft) {
 			: leftPressed || rightPressed;
 }
 
+function isLayer(state, ...layers) {
+	return layers.includes(state.currentLayer)
+}
+
 function updateLayers(state, isLeft, index, isPressed) {
-	if (index === puncKeyIndex && (state.currentLayer === 'colemak' || state.currentLayer === 'punc' || state.currentLayer === 'specials'))
+	if (index === puncKeyIndex && isLayer(state, 'colemak', 'qwerty', 'puncLeft', 'puncRight', 'specials'))
 		return {
 			...state,
 				currentLayer: isPressed && isPuncPressed(state, !isLeft)
@@ -88,17 +92,17 @@ function updateLayers(state, isLeft, index, isPressed) {
 					// 	? 'punc'
 					// 	: 'colemak'
 		};
-	else if (index === arrowsKeyIndex && isLeft === true && (state.currentLayer === 'colemak' || state.currentLayer === 'arrows'))
+	else if (index === arrowsKeyIndex && isLeft === true && isLayer(state, 'colemak', 'arrows'))
 		return {
 			...state,
 				currentLayer: isPressed ? 'arrows' : 'colemak'
 		};
-	else if (index === tabKeyIndex && isLeft === true && (state.currentLayer === 'colemak' || state.currentLayer === 'num' || state.currentLayer === 'functions'))
+	else if (index === tabKeyIndex && isLeft === true && isLayer(state, 'colemak', 'num', 'functions'))
 		return {
 			...state,
 				currentLayer: isPressed ? 'num' : 'colemak'
 		};
-	else if (index === qKeyIndex && isLeft === true && (state.currentLayer === 'num' || state.currentLayer === 'functions'))
+	else if (index === qKeyIndex && isLeft === true && isLayer(state, 'num', 'functions'))
 		return {
 			...state,
 				currentLayer: isPressed ? 'functions' : 'num'
