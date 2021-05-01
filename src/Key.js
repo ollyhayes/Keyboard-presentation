@@ -28,8 +28,8 @@ export default function Key({
 		className={classNames('key', {"is-pressed": isPressed}, layerSwitching ?? layerName)}
 		transform={getKeyTransform(x, y, height, width, rotation)}>
 		<g>
-			<rect class="category-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>
-			<rect class="click-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>
+			<rect className="category-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>
+			<rect className="click-indicator" x={-width / 2} y={-height / 2} width={width} height={height}/>
 			<text 
 				textAnchor="middle" 
 				dominantBaseline="central"
@@ -40,7 +40,7 @@ export default function Key({
 			</text>
 			{
 				bump
-					? <line class="bump" x1="-6" x2="6" y1="16" y2="16"/>
+					? <line className="bump" x1="-6" x2="6" y1="16" y2="16"/>
 					: null
 			}
 		</g>

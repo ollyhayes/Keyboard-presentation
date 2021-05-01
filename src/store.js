@@ -15,7 +15,7 @@ export function useState() {
 	useEffect(() => {
 		const subscription = store.subscribe(() => forceRender())
 		return () => store.unsubscribe(subscription)
-	}, [])
+	}, [store])
 
 	return store.getValue()
 }

@@ -25,11 +25,11 @@ export default function Legend() {
 	}));
 
 	return <g
-		class="legend"
+		className="legend"
 		transform="translate(-300, 235)">
 		{
-			legendKeys.map(legendKey =>
-				<Key {...legendKey}/>
+			legendKeys.map((legendKey, index) =>
+				<Key key={index} {...legendKey}/>
 			)}
 	</g>;
 }
