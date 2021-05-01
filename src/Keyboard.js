@@ -185,7 +185,7 @@ export function KeyboardSide({isLeft}) {
 			transformedKeys.map((key, index) =>
 				<Key
 					key={index}
-					{...deduceCurrentText(key, state.currentLayer)}
+					{...deduceCurrentText(key, state.currentLayer, state.baseLayer)}
 					currentLayer={state.currentLayer}
 				/>)
 		}
@@ -193,7 +193,7 @@ export function KeyboardSide({isLeft}) {
 }
 
 // move this to actions
-function deduceCurrentText(key, currentLayer) {
+function deduceCurrentText(key, currentLayer, baseLayer) {
 	return {
 		...key,
 		...currentLayer === 'puncLeft' && key.puncLeft.name
@@ -210,7 +210,6 @@ function deduceCurrentText(key, currentLayer) {
 								? key.specialLeft
 								: currentLayer === 'specialRight' && key.specialRight.name
 									? key.specialRight
-									: key.default
-									// : key.qwerty
+									: key[baseLayer]
 	};
 }

@@ -1,7 +1,7 @@
 import { map, pipe, values, reduce, mapObjIndexed, zipWith, addIndex, mergeRight } from "ramda";
 
 const layerDefinitions = {
-	default: {
+	colemak: {
 		left: [
 			'tab', 'q', 'w', 'f', 'p', 'g',
 			'esc', 'a', 'r', 's', 't', 'd',
@@ -177,7 +177,8 @@ console.log('Keyboard: ', keyboard);
 
 const config = {
 	keys: keyboard,
-	currentLayer: 'colemak'
+	currentLayer: 'colemak',
+	baseLayer: 'colemak'
 };
 
 export default config;
