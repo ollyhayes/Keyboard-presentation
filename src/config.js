@@ -5,41 +5,41 @@ const layerDefinitions = {
 		left: [
 			'tab', 'q', 'w', 'f', 'p', 'g',
 			'esc', 'a', 'r', 's', 't', 'd',
-			'lshift', 'z', 'x', 'c', 'v', 'b',
-			'lctrl', 'lpunc', 'arrows'
+			'shift', 'z', 'x', 'c', 'v', 'b',
+			'ctrl', 'punc', 'arrows'
 		],
 		right: [
 			'backspace', ';', 'y', 'u', 'l', 'j',
 			'enter', 'o', 'i', 'e', 'n', 'h',
-			'rshift', '/', '.', ',', 'm', 'k',
-			'rctrl', 'rpunc', 'space'
+			'shift', '/', '.', ',', 'm', 'k',
+			'ctrl', 'punc', 'space'
 		],
 	},
 	qwerty: {
 		left: [
 			'tab', 'q', 'w', 'e', 'r', 't',
 			'esc', 'a', 's', 'd', 'f', 'g',
-			'lshift', 'z', 'x', 'c', 'v', 'b',
-			'lctrl', 'lpunc', 'arrows'
+			'shift', 'z', 'x', 'c', 'v', 'b',
+			'ctrl', 'punc', 'arrows'
 		],
 		right: [
 			'backspace', 'p', 'o', 'i', 'u', 'y',
 			'enter', ';', 'l', 'k', 'j', 'h',
-			'rshift', '/', '.', ',', 'm', 'n',
-			'rctrl', 'rpunc', 'space'
+			'shift', '/', '.', ',', 'm', 'n',
+			'ctrl', 'punc', 'space'
 		],
 	},
 	puncLeft: { // punc & special is repeated twice because the specials key 'ß' needs to switch depending on which
 		left: [
 			'a/t', '!', '"', '€', '$', '%',
 			'', '|', '¬', '[', ']', '~',
-			'', '\\', '`', 'lmeta', 'lalt', '#',
+			'', '\\', '`', 'meta', 'alt', '#',
 			'', '', ''
 		],
 		right: [
 			'', ')', '(', '*', '&', '^',
 			'', '+', '-', '}', '{', '\'',
-			'', '=', '_', 'rmeta', 'ralt', '@',
+			'', '=', '_', 'meta', 'alt', '@',
 			'', 'ß', ''
 		],
 	},
@@ -47,13 +47,13 @@ const layerDefinitions = {
 		left: [
 			'a/t', '!', '"', '€', '$', '%',
 			'', '|', '¬', '[', ']', '~',
-			'', '\\', '`', 'lmeta', 'lalt', '#',
+			'', '\\', '`', 'meta', 'alt', '#',
 			'', 'ß', ''
 		],
 		right: [
 			'', ')', '(', '*', '&', '^',
 			'', '+', '-', '}', '{', '\'',
-			'', '=', '_', 'rmeta', 'ralt', '@',
+			'', '=', '_', 'meta', 'alt', '@',
 			'', '', ''
 		],
 	},
@@ -89,7 +89,7 @@ const layerDefinitions = {
 		left: [
 			'', '‽', 'home', 'pgu', 'pgd', 'end',
 			'enter', 'del', '←', '↑', '↓', '→',
-			'', 'ins', 'c←', 'lmeta', 'lalt', 'c→',
+			'', 'ins', 'c←', 'meta', 'alt', 'c→',
 			'', 'F12', ''
 		],
 		right: [
@@ -140,16 +140,8 @@ const specialsKey = { text: 'ä', layerSwitching: "specials" };
 
 const keyDefinitions = {
 	tab: { text: '↹', layerSwitching: "num"},
-	lshift: { text: '⇑' },
-	rshift: { text: '⇑' },
-	lpunc: {...puncKey, puncKey, specialsKey },
-	rpunc: {...puncKey, puncKey, specialsKey },
-	lctrl: { text: 'ctrl' },
-	rctrl: { text: 'ctrl' },
-	lalt: { text: 'alt' },
-	ralt: { text: 'alt' },
-	lmeta: { text: 'meta' },
-	rmeta: { text: 'meta' },
+	shift: { text: '⇑' },
+	punc: {...puncKey, puncKey, specialsKey },
 	arrows: { text: '←↓↑→', layerSwitching: "arrows" },
 	enter: { text: '↲' },
 	backspace: { text: '↤' },
