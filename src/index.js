@@ -6,6 +6,7 @@ import { Provider, createStore } from './store.js';
 import config from './config';
 import openSocket from './socket';
 import { updateKeyState } from './actions';
+import setHueLayer from './hue';
 
 const store = createStore(config);
 
@@ -32,6 +33,13 @@ openSocket(keyCode => {
 	
 	updateKeyState(store, isLeft, keyCode, isPressed);
 	// console.log(Date.now(), isLeft, keyCode, isPressed);
+
+	// move this into hue.js, it should handle any throttling, think scalability!
+	let currentHueLayer = null;
+	store.subscribe(state => {
+		if (state.currentLayer !== currentHueLayer)
+			setHueLayer(state.currentLayer);
+	});
 });
 
 // document.addEventListener('keydown', event => handleKey(event, true));
