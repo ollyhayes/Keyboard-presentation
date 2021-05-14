@@ -1,6 +1,7 @@
 :root {
-  --slow-transition: 0.3s;
+  --slow-transition: 10s;
   --fast-transition: 0.1s;
+  --timing-function: cubic-bezier(0,1.19,.14,1);
 
   --alpha: #ffebb5;
   --numbers: #baffb4;
@@ -26,6 +27,7 @@ html,body,svg
 
 g.key g {
   transition: transform var(--slow-transition);
+  transition-timing-function: var(--timing-function);
 }
 g.key.is-pressed g {
   transition: none;
@@ -34,6 +36,7 @@ g.key.is-pressed g {
 
 g.key rect.click-indicator {
   transition: fill-opacity var(--slow-transition);
+  transition-timing-function: var(--timing-function);
   fill: black;
   fill-opacity: 0;
 }
@@ -45,6 +48,7 @@ g.key.is-pressed rect.click-indicator {
 
 g.key text {
   transition: fill var(--slow-transition), stroke var(--slow-transition);
+  transition-timing-function: var(--timing-function);
   fill: black;
   stroke: none;
   font-family: monospace;
@@ -56,6 +60,7 @@ g.key.is-pressed text{
 
 g.key .bump {
   transition: stroke var(--slow-transition);
+  transition-timing-function: var(--timing-function);
 }
 g.key.is-pressed .bump {
   transition: none;
