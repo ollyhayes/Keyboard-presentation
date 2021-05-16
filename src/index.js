@@ -6,7 +6,7 @@ import { Provider, createStore } from './store.js';
 import config from './config';
 import openSocket from './socket';
 import { updateKeyState } from './actions';
-import setHueLayer from './hue';
+// import setHueLayer from './hue';
 
 const store = createStore(config);
 
@@ -34,7 +34,7 @@ openSocket(keyCode => {
 	updateKeyState(store, isLeft, keyCode, isPressed);
 	// console.log(Date.now(), isLeft, keyCode, isPressed);
 
-	store.subscribe(state => setHueLayer(state.currentLayer));
+	// store.subscribe(state => setHueLayer(state.currentLayer));
 });
 
 // document.addEventListener('keydown', event => handleKey(event, true));
