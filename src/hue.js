@@ -1,4 +1,3 @@
-import request from 'request-promise-native';
 import * as colorsys from 'colorsys';
 import {map} from 'ramda';
 
@@ -9,17 +8,7 @@ const rooms = {
 	'lounge': '2'
 };
 
-// async function discover() {
-// 	return '192.168.0.15';
-	
-// 	console.log('Discovering bridge...')
-// 	const bridges = await request({url: 'https://discovery.meethue.com', json: true})
-// 	const address = bridges[0].internalipaddress
-// 	console.log('Bridge: ', address)
-
-// 	return address
-// }
-
+// define these somewhere better and set them as the css variables
 const layerColours = map(rgbHexValue => {
 	const {h, s, l} = colorsys.hex2Hsl(rgbHexValue);
 	return [h, s, l];
@@ -27,24 +16,31 @@ const layerColours = map(rgbHexValue => {
 	default: 'ffebb5',
 	num: 'baffb4',
 	arrows: 'b5b4ff',
-	punc: 'ffb5ff',
+	puncLeft: 'ffb5ff',
+	puncRight: 'ffb5ff',
 	functions: 'ffbab5',
-	specials: 'a9fffb',
+	specialLeft: 'a9fffb',
+	specialRight: 'a9fffb',
 });
 
+let currentLayer = null;
 export default async function setHueLayer(layerName) {
+	if (currentLayer === layerName)
+		return;
+
+	currentLayer = layerName;
 	const [hue, sat, bri] = layerColours[layerName];
 
-	console.log('hsl: ', hue, sat, bri);
+	console.log('setting hsl: ', hue, sat, bri);
 
-
-	const response = await request(
+	// it's slow because of the preflight. consider converting backend to js so I can
+	// get the layer and send the hue request directly
+	const response = await fetch(
+		`http://${bridgeIp}/api/${username}/groups/${rooms.lounge}/action`,
 		{
-			url: `http://${bridgeIp}/api/${username}/groups/${rooms.lounge}/action`,
-			json: true,
 			method: 'PUT',
-			body: {hue, sat, bri}
+			body: JSON.stringify({hue: hue * 182, sat, bri, transitiontime: 0})
 		});
 
-	console.log('Result: ', response);
+	console.log('Result: ', await response.json());
 }
