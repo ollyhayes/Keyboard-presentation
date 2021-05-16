@@ -36,6 +36,7 @@ openSocket(keyCode => {
 
 	// move this into hue.js, it should handle any throttling, think scalability!
 	let currentHueLayer = null;
+
 	store.subscribe(state => {
 		if (state.currentLayer !== currentHueLayer)
 			setHueLayer(state.currentLayer);

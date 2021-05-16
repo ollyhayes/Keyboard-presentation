@@ -1,9 +1,6 @@
-// const request = require('request-promise-native');
-// const convert = require('
-
 import request from 'request-promise-native';
-import * as convert from 'color-convert'; // convert always undefined, must switch to diferent library
-import {mapObjIndexed} from 'ramda';
+import * as colorsys from 'colorsys';
+import {map} from 'ramda';
 
 const bridgeIp = '192.168.0.15';
 const username = 'z113OjEddHlIbUrcagx7LL49ePgPgm3bB92aWE5H';
@@ -23,22 +20,23 @@ const rooms = {
 // 	return address
 // }
 
-const layerColours = mapObjIndexed((layerName, rgbHexValue) => ({
-	layerName,
-	hsl: convert.rgbHex.hsl(rgbHexValue)
-}), {
-	default: 'FFEBB5',
-	numbers: 'BAFFB4',
-	control: 'B5B4FF',
-	punc: 'FFB5FF',
-	functions: 'FFBAB5',
-	specials: 'A9FFFB',
+const layerColours = map(rgbHexValue => {
+	const {h, s, l} = colorsys.hex2Hsl(rgbHexValue);
+	return [h, s, l];
+}, {
+	default: 'ffebb5',
+	num: 'baffb4',
+	arrows: 'b5b4ff',
+	punc: 'ffb5ff',
+	functions: 'ffbab5',
+	specials: 'a9fffb',
 });
 
 export default async function setHueLayer(layerName) {
 	const [hue, sat, bri] = layerColours[layerName];
 
 	console.log('hsl: ', hue, sat, bri);
+
 
 	const response = await request(
 		{
