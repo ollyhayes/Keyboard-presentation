@@ -14,7 +14,9 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^4.0.3",
-    "reconnecting-websocket": "^4.4.0"
+    "reconnecting-websocket": "^4.4.0",
+    "serialport": "^9.1.0",
+    "ws": "^7.4.6"
   },
   "scripts": {
     "start": "react-scripts start",
