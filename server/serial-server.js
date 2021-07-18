@@ -27,17 +27,34 @@ function startWss() {
 }
 
 function startSerial(sendWs) {
-	const port = new SerialPort('/dev/ttyACM0');
-	port.on('data', data => {
-		console.log(`Recieved: ${data}`);
+	let port = null;
 
-		sendWs(data.readUInt8());
-	});
+	function open() {
+		console.log('opening port');
+		port = new SerialPort('/dev/ttyACM0');
+
+		port.on('data', data => {
+			console.log(`Recieved: ${data}`);
+
+			sendWs(data.readUInt8());
+		});
+
+		port.on('error', error => console.log(error));
+		port.on('close', async error => {
+			console.log("Port closed error: ", error)
+			open();
+		});
+	}
+
+	open();
 
 	return {
-		close: () => {
-			console.log('Closing serial');
-			port.close();
+		close() {
+			if (port) {
+				console.log('Closing serial');
+				port.close();
+				port = null;
+			}
 		}
 	};
 }
