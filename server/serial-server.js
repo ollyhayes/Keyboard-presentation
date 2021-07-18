@@ -1,6 +1,9 @@
 const SerialPort = require('serialport');
+const { map } = require('ramda');
+const colorsys = require('colorsys');
 const Websocket = require('ws');
 const Phea = require('phea');
+const { createStore } = require('./store');
 
 const bridgeDetails = {
 	address: '192.168.0.15',
@@ -10,8 +13,12 @@ const bridgeDetails = {
 const entertainmentGroupId = 4;
 
 async function startPhea() {
+	const { updateKeyState } = await import('../src/actions.js');
+	const { keyDataToKey } = await import('../src/keyCode.js');
+	const config = await import('../src/config.js');
+
 	console.log("Starting Phea");
-	await new Promise(resolve => setTimeout(resolve, 5000)); // nodemon restarts it too fast
+	// await new Promise(resolve => setTimeout(resolve, 5000)); // nodemon restarts it too fast
 
 	const bridge = await Phea.bridge(bridgeDetails);
 	// const groups = await bridge.getGroup(0);
@@ -26,9 +33,40 @@ async function startPhea() {
 		[0, 0, 255]
 	];
 
+	// define these somewhere better and set them as the css variables
+	const layerColours = map(rgbHexValue => {
+		const {r, g, b} = colorsys.hex2Rgb(rgbHexValue);
+		return [r, g, b];
+	}, {
+		default: 'ffebb5',
+		num: 'baffb4',
+		arrows: 'b5b4ff',
+		puncLeft: 'ffb5ff',
+		puncRight: 'ffb5ff',
+		functions: 'ffbab5',
+		specialLeft: 'a9fffb',
+		specialRight: 'a9fffb',
+	});
+
+	const store = createStore(config.default);
+
+	store.subscribe(state => {
+		const rgb = layerColours[state.currentLayer];
+
+		bridge.transition([0], rgb, 0);
+	});
+
 	return {
 		send: data => {
-			bridge.transition([0], colours[colourIndex++ % colours.length], 0);
+			const {
+				isLeft,
+				keyCode,
+				isPressed
+			} = keyDataToKey(data);
+
+			updateKeyState(store, isLeft, keyCode, isPressed);
+
+			// bridge.transition([0], colours[colourIndex++ % colours.length], 0);
 		},
 		close: async () => {
 			console.log('Closing phea');
@@ -63,7 +101,7 @@ function startWss() {
 	};
 }
 
-function startSerial(sendWs) {
+function startSerial(handleData) {
 	let port = null;
 
 	function open() {
@@ -71,9 +109,13 @@ function startSerial(sendWs) {
 		port = new SerialPort('/dev/ttyACM0');
 
 		port.on('data', data => {
-			console.log(`Recieved: ${data}`);
+			try {
+				console.log(`Recieved: ${data}`);
 
-			sendWs(data.readUInt8());
+				handleData(data.readUInt8());
+			} catch (error) {
+				console.log(error);
+			}
 		});
 
 		port.on('error', error => console.log(error));
@@ -96,7 +138,6 @@ function startSerial(sendWs) {
 	};
 }
 
-
 async function start() {
 	const {send: sendWs, close: closeWs} = startWss();
 	const {send: sendPhea, close: closePhea} = await startPhea().catch(console.log);
@@ -117,7 +158,7 @@ async function start() {
 	}
 
 	[
-		'beforeExit', 'uncaughtException', 'unhandledRejection', 
+		'beforeExit', 'unhandledRejection', 
 		'SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 
 		'SIGABRT','SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 
 		'SIGUSR2', 'SIGTERM', 

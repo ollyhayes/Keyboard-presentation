@@ -6,6 +6,7 @@ import { Provider, createStore } from './store.js';
 import config from './config';
 import openSocket from './socket';
 import { updateKeyState } from './actions';
+import { keyDataToKey } from './keyCode';
 // import setHueLayer from './hue';
 
 const store = createStore(config);
@@ -17,19 +18,12 @@ ReactDOM.render(
 	document.getElementById('root')
 );
 
-const initialOffset = 40;
-const releaseOffset = 50;
-const righthandOffset = 24;
-
-openSocket(keyCode => {
-	keyCode -= initialOffset;
-	const isPressed = keyCode < releaseOffset;
-	keyCode %= releaseOffset;
-
-	const isLeft = keyCode < righthandOffset;
-	keyCode %= righthandOffset;
-
-	keyCode = keyCode >= 21 ? keyCode - 3 : keyCode; // thumb keys are offset by three (because we're using the column to build the index)
+openSocket(keyData => {
+	const {
+		isLeft,
+		keyCode,
+		isPressed
+	} = keyDataToKey(keyData);
 	
 	updateKeyState(store, isLeft, keyCode, isPressed);
 	// console.log(Date.now(), isLeft, keyCode, isPressed);

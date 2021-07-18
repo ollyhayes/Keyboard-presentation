@@ -31,7 +31,7 @@ const aKeyIndex = 7;
 const shiftKeyIndex = 12;
 const escKeyIndex = 6;
 
-export function isPuncPressed(state, isLeft) {
+function isPuncPressed(state, isLeft) {
 	return isKeyPressed(state, puncKeyIndex, isLeft);
 }
 
