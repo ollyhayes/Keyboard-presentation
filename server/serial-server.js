@@ -1,5 +1,42 @@
 const SerialPort = require('serialport');
 const Websocket = require('ws');
+const Phea = require('phea');
+
+const bridgeDetails = {
+	address: '192.168.0.15',
+	username: 'bB8qVwOWQLvcJU6Wad80o0hkE9YZIXFEm9HEmeTH',
+	psk: 'CE8837BE11743A8BB7CC73E35FABF57F'
+}
+const entertainmentGroupId = 4;
+
+async function startPhea() {
+	console.log("Starting Phea");
+	await new Promise(resolve => setTimeout(resolve, 5000)); // nodemon restarts it too fast
+
+	const bridge = await Phea.bridge(bridgeDetails);
+	// const groups = await bridge.getGroup(0);
+	// console.log(groups);
+
+	await bridge.start(entertainmentGroupId);
+
+	let colourIndex = 0;
+	const colours = [
+		[255, 0, 0],
+		[0, 255, 0],
+		[0, 0, 255]
+	];
+
+	return {
+		send: data => {
+			bridge.transition([0], colours[colourIndex++ % colours.length], 0);
+		},
+		close: async () => {
+			console.log('Closing phea');
+			await bridge.stop();
+			console.log('Closed phea');
+		}
+	};
+}
 
 function startWss() {
 	const wss = new Websocket.Server({ port: 8765 });
@@ -59,19 +96,32 @@ function startSerial(sendWs) {
 	};
 }
 
-function start() {
-	const {send,  close: closeWs} = startWss()
+
+async function start() {
+	const {send: sendWs, close: closeWs} = startWss();
+	const {send: sendPhea, close: closePhea} = await startPhea().catch(console.log);
+
+	function send(data) {
+		sendWs(data);
+		sendPhea(data);
+	}
 
 	const {close: closeSerial} = startSerial(send);
 
-	process.on('exit', () => {
+	async function exitHandler() {
 		console.log('process exited');
 		closeWs();
 		closeSerial();
-	});
+		await closePhea();
+		process.exit();
+	}
 
-	process.on('SIGINT', () => process.exit(0));
-	process.on('SIGTERM', () => process.exit(0));
+	[
+		'beforeExit', 'uncaughtException', 'unhandledRejection', 
+		'SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 
+		'SIGABRT','SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 
+		'SIGUSR2', 'SIGTERM', 
+	].forEach(event => process.on(event, exitHandler));
 }
 
 start();

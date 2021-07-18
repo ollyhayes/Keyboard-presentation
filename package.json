@@ -10,6 +10,7 @@
     "colorsys": "^1.0.22",
     "electron": "^12.0.0",
     "nodemon": "^2.0.7",
+    "phea": "^1.0.6",
     "ramda": "^0.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -20,7 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:server": "nodemon server/serial-server.js",
+    "start:server": "nodemon --signal SIGTERM server/serial-server.js",
     "start:electron": "electron src/electron.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
