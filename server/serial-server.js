@@ -13,6 +13,7 @@ const bridgeDetails = {
 const entertainmentGroupId = 4;
 
 async function startPhea() {
+	// seemed this was actually the easiest way to get esm modules in
 	const { updateKeyState } = await import('../src/actions.js');
 	const { keyDataToKey } = await import('../src/keyCode.js');
 	const config = await import('../src/config.js');
