@@ -22,6 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "start:server": "nodemon --signal SIGTERM server/serial-server.js",
+    "start:server-py": "nodemon --delay 10 --exec python server/serial-server.py",
     "start:electron": "electron src/electron.cjs",
     "build": "react-scripts build",
     "test": "react-scripts test",
