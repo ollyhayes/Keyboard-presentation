@@ -17,7 +17,7 @@ app.on('ready', () => {
 		// focusable: false
 	});
 
-	window.loadURL('http://localhost:3001/');
+	window.loadURL('http://localhost:8764/');
 });
 
 // app.on('window-all-closed', e => e.preventDefault());

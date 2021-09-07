@@ -141,11 +141,11 @@ function startSerial(handleData) {
 
 async function start() {
 	const {send: sendWs, close: closeWs} = startWss();
-	const {send: sendPhea, close: closePhea} = await startPhea().catch(console.log);
+	// const {send: sendPhea, close: closePhea} = await startPhea().catch(console.log);
 
 	function send(data) {
 		sendWs(data);
-		sendPhea(data);
+		// sendPhea(data);
 	}
 
 	const {close: closeSerial} = startSerial(send);
@@ -154,7 +154,7 @@ async function start() {
 		console.log('process exited');
 		closeWs();
 		closeSerial();
-		await closePhea();
+		// await closePhea();
 		process.exit();
 	}
 
