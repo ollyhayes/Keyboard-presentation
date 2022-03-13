@@ -8,15 +8,15 @@ export default function Legend() {
 	const layers = [
 		{text: state.baseLayer === 'colemak' ? 'Colemak' : 'Qwerty', names: ['base'], x: 0, y: 0},
 		{text: 'Navigation', names: ['arrows'], x: 0, y: 1},
-		{text: 'Symbols', names: ['puncLeft', 'puncRight'], x: 0, y: 2},
-		{text: 'Specials', names: ['specialLeft', 'specialRight'], x: 1, y: 2},
-		{text: 'Numbers', names: ['num'], x: 0, y: 3},
-		{text: 'Functions', names: ['functions'], x: 1, y: 3},
+		{text: 'Symbols', names: ['puncLeft', 'puncRight'], x: 1, y: 0},
+		{text: 'Specials', names: ['specialLeft', 'specialRight'], x: 1, y: 1},
+		{text: 'Numbers', names: ['num'], x: 2, y: 0},
+		{text: 'Functions', names: ['functions'], x: 2, y: 1},
 	];
 
 	const legendKeys = layers.map(({text, names, x, y}, i) => ({
-		x: x * 170,
-		y: y * 54,
+		x: 100 + x * 170,
+		y: 90 + y * 54,
 		height: 39.263,
 		width: 130,
 		text,
