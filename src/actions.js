@@ -27,9 +27,10 @@ const puncKeyIndex = 19;
 const arrowsKeyIndex = 20;
 const tabKeyIndex = 0;
 const qKeyIndex = 1;
-const aKeyIndex = 7;
-const shiftKeyIndex = 12;
-const escKeyIndex = 6;
+
+const gKeyIndex = 5;
+// const dKeyIndex = 11;
+const bKeyIndex = 17;
 
 function isPuncPressed(state, isLeft) {
 	return isKeyPressed(state, puncKeyIndex, isLeft);
@@ -77,13 +78,12 @@ function updateLayers(state, isLeft, index, isPressed) {
 			...state,
 			currentLayer: isPressed ? 'functions' : 'num'
 		};
-	else if (isLeft && [tabKeyIndex, aKeyIndex].every(i => isKeyPressed(state, i, true))) {
-		return index === escKeyIndex
-			? { ...state, baseLayer: 'qwerty' }
-			: index === shiftKeyIndex
-				? { ...state, baseLayer: 'colemak' }
-				: state;
-	}
+	else if (index === gKeyIndex && isLeft && isLayer(state, 'num'))
+		return { ...state, baseLayer: 'colemak' };
+	// else if (index === dKeyIndex && isLeft && isLayer(state, 'num'))
+	// 	return { ...state, baseLayer: 'games' }; // games layer not implemented in presentation... yet
+	else if (index === bKeyIndex && isLeft && isLayer(state, 'num'))
+		return { ...state, baseLayer: 'qwerty' };
 	else
 		return state;
 }
