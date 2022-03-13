@@ -70,7 +70,7 @@ g.key.is-pressed .bump {
 g.key rect.category-indicator {
   transition: fill var(--fast-transition);
 }
-g.key.base,g.key.colemak,g.key.qwerty rect.category-indicator { fill: var(--alpha); }
+g.key.base,g.key.colemak,g.key.qwerty,g.key.game rect.category-indicator { fill: var(--alpha); }
 g.key.punc,g.key.puncLeft,g.key.puncRight rect.category-indicator { fill: var(--punc); }
 g.key.num rect.category-indicator { fill: var(--numbers); }
 g.key.arrows rect.category-indicator { fill: var(--control); }

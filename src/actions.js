@@ -29,7 +29,7 @@ const tabKeyIndex = 0;
 const qKeyIndex = 1;
 
 const gKeyIndex = 5;
-// const dKeyIndex = 11;
+const dKeyIndex = 11;
 const bKeyIndex = 17;
 
 function isPuncPressed(state, isLeft) {
@@ -80,8 +80,8 @@ function updateLayers(state, isLeft, index, isPressed) {
 		};
 	else if (index === gKeyIndex && isLeft && isLayer(state, 'num'))
 		return { ...state, baseLayer: 'colemak' };
-	// else if (index === dKeyIndex && isLeft && isLayer(state, 'num'))
-	// 	return { ...state, baseLayer: 'games' }; // games layer not implemented in presentation... yet
+	else if (index === dKeyIndex && isLeft && isLayer(state, 'num'))
+		return { ...state, baseLayer: 'game' }; // games layer not implemented in presentation... yet
 	else if (index === bKeyIndex && isLeft && isLayer(state, 'num'))
 		return { ...state, baseLayer: 'qwerty' };
 	else

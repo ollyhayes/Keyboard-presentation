@@ -15,6 +15,20 @@ const layerDefinitions = {
 			'ctrl', 'punc', 'space'
 		],
 	},
+	game: {
+		left: [
+			'tab', 'q', 'w', 'e', 'r', 't',
+			'esc', 'a', 's', 'd', 'f', 'g',
+			'shift', 'z', 'x', 'c', 'v', 'b',
+			'ctrl', 'alt', 'space'
+		],
+		right: [
+			'backspace', 'p', 'o', 'i', 'u', 'y',
+			'enter', ';', 'l', 'k', 'j', 'h',
+			'shift', '/', '.', ',', 'm', 'n',
+			'ctrl', 'punc', 'arrows'
+		],
+	},
 	qwerty: {
 		left: [
 			'tab', 'q', 'w', 'e', 'r', 't',
