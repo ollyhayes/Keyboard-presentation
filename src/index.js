@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import App from './App.js';
 import { Provider, createStore } from './store.js';
-import config from './config';
-import openSocket from './socket';
-import { updateKeyState } from './actions';
-import { keyDataToKey } from './keyCode';
+import config from './config.js';
+import openSocket from './socket.js';
+import { updateKeyState } from './actions.js';
+import { keyDataToKey } from './keyCode.js';
 // import setHueLayer from './hue';
 
 const store = createStore(config);

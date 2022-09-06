@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import Keyboard from './Keyboard';
+import Keyboard from './Keyboard.js';
 
 function App() {
 	return (
