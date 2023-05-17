@@ -122,6 +122,7 @@ function startSerial(handleData) {
 		port.on('error', error => console.log(error));
 		port.on('close', async error => {
 			console.log("Port closed error: ", error)
+			await new Promise(resolve => setTimeout(10000, resolve));
 			open();
 		});
 	}
