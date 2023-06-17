@@ -8,8 +8,8 @@ cd ~/tools/keyboard-presentation
 tmux new-window -n keyboard-presentation "npm run start"
 tmux send-keys yes enter
 tmux split-window -v
-tmux send-keys npm space run space start:server space enter
+tmux send-keys npm space run space start:server-py space enter
 
 tmux split-window -h
-sleep 20
-tmux send-keys npm space run space start:electron space enter
+# sleep 20
+# tmux send-keys npm space run space start:electron space enter
