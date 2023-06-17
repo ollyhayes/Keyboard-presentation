@@ -101,13 +101,13 @@ const layerDefinitions = {
 	},
 	arrows: {
 		left: [
-			'', '', 'home', 'pgu', 'pgd', 'end',
+			'', 'prsc', 'home', 'pgu', 'pgd', 'end',
 			'enter', 'del', '←', '↑', '↓', '→',
 			'', 'ins', 'c←', 'meta', 'alt', 'c→',
 			'', 'F12', ''
 		],
 		right: [
-			'', '', 'end', 'pgu', 'pgd', 'home',
+			'', 'prsc', 'end', 'pgu', 'pgd', 'home',
 			'', 'del', '→', '↑', '↓', '←',
 			'', 'ins', 'c→', '↑↑↑↑', '↓↓↓↓', 'c←',
 			'', 'F12', ''
