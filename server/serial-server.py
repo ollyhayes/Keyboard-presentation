@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Reads one byte per key event from the keyboard's serial port and forwards it to
+# every connected websocket client (the React app). See src/keyCode.js for the format.
+#
+# When the keyboard is unplugged, it touches a file so nodemon restarts the process.
+# That's a hack, but it was the simplest way to survive replugging the keyboard.
 import asyncio
 import websockets
 import io, os, sys

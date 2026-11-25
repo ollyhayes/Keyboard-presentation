@@ -1,3 +1,6 @@
+# First approach (superseded by serial-server.py): read key events from X11 using
+# pyxhook. That only sees the keycodes the OS receives, not which physical key or
+# layer was used, which is why the keyboard firmware now reports them over serial.
 import asyncio
 import websockets
 import json

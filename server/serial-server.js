@@ -1,3 +1,7 @@
+// Node version of the serial -> websocket bridge. It was written so the layer state
+// could drive Philips Hue lights via the Entertainment API (phea), which is why it
+// imports the frontend's actions.js. I went back to the simpler Python server
+// (serial-server.py) for day-to-day use, so the Hue part is commented out.
 const SerialPort = require('serialport');
 const { map } = require('ramda');
 const colorsys = require('colorsys');
@@ -7,8 +11,8 @@ const { createStore } = require('./store');
 
 const bridgeDetails = {
 	address: '192.168.0.15',
-	username: 'bB8qVwOWQLvcJU6Wad80o0hkE9YZIXFEm9HEmeTH',
-	psk: 'CE8837BE11743A8BB7CC73E35FABF57F'
+	username: '<hue-bridge-username>', // placeholder: get one by pairing with the bridge
+	psk: '<hue-entertainment-psk>' // placeholder: returned alongside the username when pairing
 }
 const entertainmentGroupId = 4;
 

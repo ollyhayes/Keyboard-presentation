@@ -1,4 +1,7 @@
 #!/usr/bin/python
+# Abandoned experiment, kept for reference: talking to the keyboard over raw HID
+# instead of serial. It's adapted from the example below and doesn't fully work.
+#
 # Module:   hid_test.py
 # Author:   Wade Hampton
 # Date:     n/a

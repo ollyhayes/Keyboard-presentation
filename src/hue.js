@@ -1,8 +1,11 @@
+// Experiment (currently unused): change the colour of my Philips Hue lights to match
+// the active layer. It was too slow from the browser because of the CORS preflight,
+// so I moved it to the server (see startPhea in server/serial-server.js).
 import * as colorsys from 'colorsys';
 import {map} from 'ramda';
 
 const bridgeIp = '192.168.0.15';
-const username = 'z113OjEddHlIbUrcagx7LL49ePgPgm3bB92aWE5H';
+const username = '<hue-bridge-username>'; // placeholder: get one by pairing with the bridge
 const rooms = {
 	'bedroom': '1',
 	'lounge': '2'

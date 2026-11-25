@@ -23,6 +23,8 @@ function updateKey(keys, index, update) {
 			: key);
 }
 
+// Indexes into the 21-key arrays in config.js. These are coupled to the order of
+// those arrays: deriving them from the `layerSwitching` key definitions would be nicer.
 const puncKeyIndex = 19;
 const arrowsKeyIndex = 20;
 const tabKeyIndex = 0;
@@ -51,6 +53,10 @@ function isLayer(state, ...layers) {
 	return layers.includes(state.currentLayer);
 }
 
+// Mirrors the layer logic in my keyboard firmware so the on-screen keyboard shows
+// the same layer as the real one. Holding one punc key gives symbols, holding both
+// gives specials (the side matters so the "ß" key can sit under the other thumb).
+// I know the nested ternaries are hard to read; a transition table would be clearer.
 function updateLayers(state, isLeft, index, isPressed) {
 	if (index === puncKeyIndex && isLayer(state, 'default', 'puncLeft', 'puncRight', 'specialLeft', 'specialRight'))
 		return {
